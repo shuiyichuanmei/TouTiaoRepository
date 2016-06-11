@@ -19,10 +19,6 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-
-/**
- * Created by wang on 2016/6/7.
- */
 @SuppressLint("JavascriptInterface")
 public class TouTiaoDetail extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -33,11 +29,13 @@ public class TouTiaoDetail extends AppCompatActivity {
     WebView webView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toutiaodetail);
         //setNeedBackGesture(true);//设置需要手势监听
-        getData();
+
+        Intent intent1 = getIntent();
+        news_url="http://toutiao.ishowyou.cc/appdetail.aspx?id="+intent1.getStringExtra("id");
+        //getData();
         initView();
         initWebView();
     }
@@ -49,31 +47,27 @@ public class TouTiaoDetail extends AppCompatActivity {
         news_source = "sdfsdfsdf";
         news_date ="dfsdfsdf";
     }
-
-    private void initWebView() {
-        webView = (WebView)findViewById(R.id.wb_details);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-        if (!TextUtils.isEmpty(news_url)) {
-            WebSettings settings = webView.getSettings();
-            settings.setJavaScriptEnabled(true);//设置可以运行JS脚本
-			settings.setTextZoom(300);//Sets the text zoom of the page in percent. The default is 100.
-            settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
-			settings.setUseWideViewPort(true); //打开页面时， 自适应屏幕
-			settings.setLoadWithOverviewMode(true);//打开页面时， 自适应屏幕
-            settings.setSupportZoom(false);// 用于设置webview放大
-            settings.setBuiltInZoomControls(false);
-            webView.setBackgroundResource(R.color.transparent);
-            // 添加js交互接口类，并起别名 imagelistner
-            webView.addJavascriptInterface(new JavascriptInterface(getApplicationContext()),"imagelistner");
-            webView.setWebChromeClient(new MyWebChromeClient());
-            webView.setWebViewClient(new MyWebViewClient());
-            new MyAsnycTask().execute(news_url, news_title, news_source + " " +news_date);
-        }
-    }
-
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
+    }
+    private void initWebView() {
+        webView = (WebView)findViewById(R.id.wb_details);
+        if (!TextUtils.isEmpty(news_url)) {
+            WebSettings settings = webView.getSettings();
+            settings.setJavaScriptEnabled(true);//设置可以运行JS脚本
+			//settings.setTextZoom(100);//设置页面的文本缩放百分比。默认值是100。
+            settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+			settings.setUseWideViewPort(true); //打开页面时， 自适应屏幕??
+			settings.setLoadWithOverviewMode(true);//缩小内容以适合屏幕宽度
+            settings.setSupportZoom(false);// 用于设置webview放大
+            settings.setBuiltInZoomControls(false);
+            webView.setBackgroundResource(R.color.transparent);
+            //webView.addJavascriptInterface(new JavascriptInterface(getApplicationContext()),"imagelistner");// 添加js交互接口类，并起别名 imagelistner
+            webView.setWebChromeClient(new MyWebChromeClient());//设置加载进度
+            webView.setWebViewClient(new MyWebViewClient());
+            new MyAsnycTask().execute(news_url, news_title, news_source + " " +news_date);
+        }
     }
 
 //    @Override
@@ -93,7 +87,7 @@ public class TouTiaoDetail extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String data) {
-            webView.loadDataWithBaseURL (null, data, "text/html", "utf-8",null);
+            webView.loadUrl(news_url);
         }
     }
 
@@ -148,7 +142,7 @@ public class TouTiaoDetail extends AppCompatActivity {
             view.getSettings().setJavaScriptEnabled(true);
             super.onPageFinished(view, url);
             // html加载完成之后，添加监听图片的点击js函数
-            addImageClickListner();
+            //addImageClickListner();
             progressBar.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
         }
@@ -170,7 +164,6 @@ public class TouTiaoDetail extends AppCompatActivity {
     private class MyWebChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
-            // TODO Auto-generated method stub
             if(newProgress != 100){
                 progressBar.setProgress(newProgress);
             }

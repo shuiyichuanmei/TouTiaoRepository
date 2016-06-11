@@ -31,11 +31,25 @@ public class TouTiaoFragment extends Fragment {
     private CustomListView listView;
     private TouTiaoAdapter ttAdapter = null;
     private ArrayList<TouTiaoBean> ttList = null;
+    private int pageIndex=1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.toutiao, container, false);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {// 不在最前端界面显示
+
+
+        } else {// 重新显示到最前端中
+            ttList.clear();
+            pageIndex=1;
+            addData("shuaxin");
+        }
     }
 
     @Override
@@ -75,6 +89,7 @@ public class TouTiaoFragment extends Fragment {
             @Override
             public void onRefresh() {
                 ttList.clear();
+                pageIndex=1;
                 addData("shuaxin");
             }
         });
@@ -82,6 +97,7 @@ public class TouTiaoFragment extends Fragment {
         listView.setOnLoadListener(new CustomListView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
+                pageIndex++;
                 addData("gengduo");
             }
         });
@@ -92,7 +108,9 @@ public class TouTiaoFragment extends Fragment {
                                     int position, long id) {
                 System.out.println("position==" + position);
                 System.out.println("id==" + id);
-                Intent intent = new Intent(getActivity(),TouTiaoDetail.class);
+                TouTiaoBean item = (TouTiaoBean) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), TouTiaoDetail.class);
+                intent.putExtra("id", item.getId());
                 startActivity(intent);
             }
         });
@@ -103,7 +121,7 @@ public class TouTiaoFragment extends Fragment {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         JsonHttpResponseHandler res = new JsonHttpResponseHandler();
         RequestParams rp = new RequestParams();
-        rp.add("page", "1");
+        rp.add("page", String.valueOf(pageIndex));
         ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -115,7 +133,7 @@ public class TouTiaoFragment extends Fragment {
                         tt.setId(jo.getString("id"));
                         tt.setCreateDate(jo.getString("createDate"));
                         tt.setJianJie(jo.getString("jianJie"));
-                        tt.setTitleImg("http://toutiao.ishowyou.cc/upload/" + jo.getString("titleImg"));
+                        tt.setTitleImg(jo.getString("titleImg"));
                         tt.setTypeId(jo.getString("typeId"));
                         tt.setZuoZhe(jo.getString("zuoZhe"));
                         tt.setBiaoTi(jo.getString("biaoTi"));

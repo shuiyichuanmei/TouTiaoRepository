@@ -2,6 +2,7 @@ package com.shuiyi.app.toutiao;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v4.app.Fragment;
@@ -41,7 +42,16 @@ public class MainActivity extends AppCompatActivity {
         rbOne = (RadioButton) findViewById(R.id.rbOne);
         rbTwo = (RadioButton) findViewById(R.id.rbTwo);
         rbThree = (RadioButton) findViewById(R.id.rbThree);
-
+        rbOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mFragments[0].isVisible())
+                {
+                    fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[0]);
+                    fragmentTransaction.show(mFragments[0]).commit();
+                }
+            }
+        });
         bottomRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
