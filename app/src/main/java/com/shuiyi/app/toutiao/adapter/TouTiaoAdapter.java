@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ishowyou.toutiao.R;
-import com.ishowyou.toutiao.bean.TouTiaoBean;
-import com.ishowyou.toutiao.common.DPImageOptions;
+import com.shuiyi.app.toutiao.R;
+import com.shuiyi.app.toutiao.bean.TouTiaoBean;
+import com.shuiyi.app.toutiao.common.DPImageOptions;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

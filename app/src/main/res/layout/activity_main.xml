@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <fragment
         android:id="@+id/fragement_one"
-        android:name="com.ishowyou.toutiao.TouTiaoFragment"
+        android:name="com.shuiyi.app.toutiao.TouTiaoFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="10"
@@ -14,14 +14,14 @@
 
     <fragment
         android:id="@+id/fragement_two"
-        android:name="com.ishowyou.toutiao.KuaiCanFragment"
+        android:name="com.shuiyi.app.toutiao.KuaiCanFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="10" />
 
     <fragment
         android:id="@+id/fragement_three"
-        android:name="com.ishowyou.toutiao.PingTaiFragment"
+        android:name="com.shuiyi.app.toutiao.PingTaiFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="10" />

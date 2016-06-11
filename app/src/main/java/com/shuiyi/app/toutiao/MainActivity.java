@@ -1,15 +1,16 @@
 package com.shuiyi.app.toutiao;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+
 
 public class MainActivity extends AppCompatActivity {
-
     private Fragment[] mFragments;
     private RadioGroup bottomRg;
     private FragmentManager fragmentManager;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         rbTwo = (RadioButton) findViewById(R.id.rbTwo);
         rbThree = (RadioButton) findViewById(R.id.rbThree);
 
-        bottomRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bottomRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

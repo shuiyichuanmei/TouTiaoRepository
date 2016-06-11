@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.ishowyou.toutiao.R;
+import com.shuiyi.app.toutiao.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

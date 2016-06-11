@@ -11,7 +11,7 @@ import android.util.TypedValue;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.ishowyou.toutiao.R;
+import com.shuiyi.app.toutiao.R;
 
 public class BaseActivity extends FragmentActivity {
 	protected BaseActivity ctx = null;

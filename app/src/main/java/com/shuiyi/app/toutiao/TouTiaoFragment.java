@@ -10,10 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.ishowyou.toutiao.adapter.TouTiaoAdapter;
-import com.ishowyou.toutiao.bean.TouTiaoBean;
-import com.ishowyou.toutiao.net.AsyncHttpUtil;
-import com.ishowyou.toutiao.view.CustomListView;
+import com.shuiyi.app.toutiao.adapter.TouTiaoAdapter;
+import com.shuiyi.app.toutiao.bean.TouTiaoBean;
+import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
+import com.shuiyi.app.toutiao.view.CustomListView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
