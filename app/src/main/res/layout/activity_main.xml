@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.shuiyi.app.toutiao.MainActivity">
+    android:orientation="vertical">
+    <fragment
+        android:id="@+id/fragement_one"
+        android:name="com.ishowyou.toutiao.TouTiaoFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"
+        tools:layout="@layout/toutiao" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    <fragment
+        android:id="@+id/fragement_two"
+        android:name="com.ishowyou.toutiao.KuaiCanFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="10" />
+
+    <fragment
+        android:id="@+id/fragement_three"
+        android:name="com.ishowyou.toutiao.PingTaiFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="10" />
+
+    <RadioGroup
+        android:id="@+id/bottomRg"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbOne"
+            style="@style/toolbar_button_style"
+            android:checked="true"
+            android:drawableTop="@drawable/main_tab1img"
+            android:text="头条" />
+
+        <RadioButton
+            android:id="@+id/rbTwo"
+            style="@style/toolbar_button_style"
+            android:drawableTop="@drawable/main_tab2img"
+            android:text="快餐" />
+
+        <RadioButton
+            android:id="@+id/rbThree"
+            style="@style/toolbar_button_style"
+            android:drawableTop="@drawable/main_tab3img"
+            android:text="平台" />
+
+    </RadioGroup>
+
+</LinearLayout>

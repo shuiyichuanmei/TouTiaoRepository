@@ -3,4 +3,87 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="transparent">#00000000</color>
+    <color name="greytow">#969696</color>
+    <color name="DCDCDC">#dcdcdc</color>
+    <color name="ECECEC">#ececec</color>
+    <color name="F0F0F0">#f0f0f0</color>
+    <color name="grey">#898989</color>
+    <color name="E787878">#787878</color>
+    <color name="E505050">#505050</color>
+    <color name="freshblogsbg">#C1DDFE</color>
+    <color name="product_title">#FE7213</color>
+    <color name="hotsblogsbg">#CCD59F</color>
+    <color name="transparentwhite">#40ffffff</color>
+    <color name="C8C8C8">#c8c8c8</color>
+    <color name="CF5F5F5">#F5F5F5</color>
+    <color name="FF545A">#FF545A</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="light_gray_text">#949494</color>
+    <color name="common_list_divider">#dfdfdf</color>
+    <color name="view_unpressed">#00000000</color>
+    <color name="view_pressed">#22000000</color>
+    <color name="menu_bottom_bg">#f9f9f9</color>
+    <color name="new_tex_content">#676564</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="black">#000000</color>
+    <color name="refresh_head_bg">#2B2B2B</color>
+    <!-- 标题背景色 -->
+    <color name="paink_bg">#ff6678</color>
+    <color name="view_bg">#ececec</color>
+    <color name="white">#ffffffff</color>
+    <color name="bt_white_unselect">#ffffff</color>
+    <color name="bt_white_select">#777777</color>
+    <color name="bt_gray">#dddddd</color>
+    <color name="tv_graycacaca">#cacaca</color>
+    <color name="tv_black">#1a1a1a</color>
+    <color name="main_tabbg">#fafbfd</color>
+    <color name="main_tablinebg">#666</color>
+    <color name="dingbu_ban_touming">#e0333333</color>
+    <color name="gray_line">#d9d9d9</color>
+    <color name="bg_green">#81b71b</color>
+    <color name="bg_pressgreen">#759f27</color>
+    <color name="tv_gray">#555555</color>
+    <color name="main_bg">#f7f6f1</color>
+    <color name="gray5a5a50">#5a5a50</color>
+    <color name="grayb4b5b0">#b4b5b0</color>
+    <color name="grayb5a08f">#b5a08f</color>
+    <color name="redf96857">#f96857</color>
+    <color name="rede70630">#e70630</color>
+    <color name="redf4715f">#f4715f</color>
+    <color name="redff0049">#ff0049</color>
+    <color name="black333333">#333333</color>
+    <color name="black262425">#262425</color>
+    <color name="black060606">#060606</color>
+    <color name="orangee79406">#e79406</color>
+    <color name="orangef9674e">#f9674e</color>
+    <color name="orangef8664f">#f8664f</color>
+    <color name="listviewline">#dddddd</color>
+    <color name="gray656364">#656364</color>
+    <color name="gray858585">#858585</color>
+    <color name="graya3a3a3">#a3a3a3</color>
+    <color name="gray7d7d7d">#7d7d7d</color>
+    <color name="gl_background">#737373</color>
+    <color name="grayab895b">#ab895b</color>
+    <color name="orangeed8f24">#ed8f24</color>
+
+
+    <color name="orangeF67B2D">#F67B2D</color>
+    <color name="blue00CCCC">#00CCCC</color>
+    <color name="blue42B6FF">#42B6FF</color>
+    <color name="orangeFAB615">#FAB615</color>
+    <color name="purpleAD4FFF">#AD4FFF</color>
+    <color name="green6FC22C">#6FC22C</color>
+    <color name="redED4E39">#ED4E39</color>
+    <color name="gray70000000">#70000000</color>
+
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
 </resources>
