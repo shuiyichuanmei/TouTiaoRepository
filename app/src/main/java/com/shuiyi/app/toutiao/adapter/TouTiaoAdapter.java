@@ -24,6 +24,7 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
         super(context, beans);
         options = DPImageOptions.getDefaultOption(R.drawable.ic_stub,
                 R.drawable.ic_stub, R.drawable.ic_stub, false);
+
     }
 
     @Override
@@ -41,6 +42,7 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
                 R.id.labZuoZhe);
         TextView labCreateDate = (TextView) ViewHolder.get(convertView,
                 R.id.labCreateDate);
+
 
         labBiaoTi.setText(beans.get(position).getBiaoTi());
         labZuoZhe.setText(beans.get(position).getZuoZhe());

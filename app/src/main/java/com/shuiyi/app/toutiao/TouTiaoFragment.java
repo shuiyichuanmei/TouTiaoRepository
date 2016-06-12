@@ -64,16 +64,12 @@ public class TouTiaoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-
                     Intent intent = new Intent(getActivity(), SearchActivity.class);
                     startActivity(intent);
                     //getActivity().overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-
                 } catch (Exception ex) {
                     Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         });
         findView();

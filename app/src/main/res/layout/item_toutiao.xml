@@ -5,18 +5,22 @@
     android:layout_margin="5dp"
     android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="80dp"
-        android:layout_height="80dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <ImageView
             android:id="@+id/imgTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:contentDescription="@string/action_settings"
-            android:src="@drawable/ic_stub" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_stub"
+            />
 
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,15 +33,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text=""
-            android:textSize="@dimen/sp14" />
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
@@ -61,5 +67,5 @@
                 android:textSize="@dimen/sp12" />
         </LinearLayout>
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>
