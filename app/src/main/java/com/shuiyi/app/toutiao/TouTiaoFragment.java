@@ -10,16 +10,13 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.shuiyi.app.toutiao.Server.TouTiaoJsonHttpResponseHandler;
 import com.shuiyi.app.toutiao.adapter.TouTiaoAdapter;
 import com.shuiyi.app.toutiao.bean.TouTiaoBean;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
 import com.shuiyi.app.toutiao.view.CustomListView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -31,7 +28,7 @@ public class TouTiaoFragment extends Fragment {
     private CustomListView listView;
     private TouTiaoAdapter ttAdapter = null;
     private ArrayList<TouTiaoBean> ttList = null;
-    private int pageIndex=1;
+    private int pageIndex = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,9 +43,15 @@ public class TouTiaoFragment extends Fragment {
 
 
         } else {// 重新显示到最前端中
-            ttList.clear();
-            pageIndex=1;
-            addData("shuaxin");
+//            ttList.clear();
+//            pageIndex = 1;
+//            TouTiaoJsonHttpResponseHandler tt = new TouTiaoJsonHttpResponseHandler() {
+//                @Override
+//                public void OnSuccess(ArrayList<TouTiaoBean> ttlist) {
+//                    ttList.addAll(ttlist);
+//                }
+//            };
+//            addData(tt);
         }
     }
 
@@ -81,16 +84,33 @@ public class TouTiaoFragment extends Fragment {
         listView = (CustomListView) getActivity().findViewById(R.id.listView);
         ttList = new ArrayList<TouTiaoBean>();
         ttAdapter = new TouTiaoAdapter(getActivity(), ttList);
+        TouTiaoJsonHttpResponseHandler tt = new TouTiaoJsonHttpResponseHandler() {
+            @Override
+            public void OnSuccess(ArrayList<TouTiaoBean> ttlist) {
+                ttList.addAll(ttlist);
+                listView.setAdapter(ttAdapter);
 
-        addData("diyici");
+            }
+        };
+        addData(tt);
 
 
         listView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 ttList.clear();
-                pageIndex=1;
-                addData("shuaxin");
+                pageIndex = 1;
+                //TouTiaoBean.TouTiaoJsonHttpResponseHandler tt= new TouTiaoBean.TouTiaoJsonHttpResponseHandler();
+
+                TouTiaoJsonHttpResponseHandler tt = new TouTiaoJsonHttpResponseHandler() {
+                    @Override
+                    public void OnSuccess(ArrayList<TouTiaoBean> ttlist) {
+                        ttList.addAll(ttlist);
+                        listView.onRefreshComplete();
+                    }
+                };
+
+                addData(tt);
             }
         });
 
@@ -98,7 +118,14 @@ public class TouTiaoFragment extends Fragment {
             @Override
             public void onLoadMore() {
                 pageIndex++;
-                addData("gengduo");
+                TouTiaoJsonHttpResponseHandler tt = new TouTiaoJsonHttpResponseHandler() {
+                    @Override
+                    public void OnSuccess(ArrayList<TouTiaoBean> ttlist) {
+                        ttList.addAll(ttlist);
+                        listView.onLoadMoreComplete();
+                    }
+                };
+                addData(tt);
             }
         });
 
@@ -117,38 +144,10 @@ public class TouTiaoFragment extends Fragment {
 
     }
 
-    private void addData(final String flag) {
+    private void addData(JsonHttpResponseHandler jhrh) {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
-        JsonHttpResponseHandler res = new JsonHttpResponseHandler();
         RequestParams rp = new RequestParams();
         rp.add("page", String.valueOf(pageIndex));
-        ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                for (int i = 0; i < response.length(); i++) {
-                    TouTiaoBean tt = new TouTiaoBean();
-                    try {
-                        JSONObject jo = response.optJSONObject(i);
-                        tt.setId(jo.getString("id"));
-                        tt.setCreateDate(jo.getString("createDate"));
-                        tt.setJianJie(jo.getString("jianJie"));
-                        tt.setTitleImg(jo.getString("titleImg"));
-                        tt.setTypeId(jo.getString("typeId"));
-                        tt.setZuoZhe(jo.getString("zuoZhe"));
-                        tt.setBiaoTi(jo.getString("biaoTi"));
-                    } catch (Exception ex) {
-                    }
-                    ttList.add(tt);
-                }
-                if (flag == "diyici") {
-                    listView.setAdapter(ttAdapter);
-                } else if (flag == "shuaxin") {
-                    listView.onRefreshComplete();
-                } else if (flag == "gengduo") {
-                    listView.onLoadMoreComplete();
-                }
-            }
-        });
+        ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
     }
 }
