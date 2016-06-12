@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private RadioButton rbOne, rbTwo, rbThree, rbFour;
-    private int num=0;
+    private int num=4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
