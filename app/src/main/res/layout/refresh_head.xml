@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:background="@color/refresh_head_bg"
+    android:background="@null"
     android:orientation="horizontal" >
 
     <!-- 内容 -->
@@ -55,7 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center_horizontal"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            >
 
             <!-- 提示 -->
 
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/p2refresh_release_refresh"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="15sp" />
 
             <!-- 最近更新 -->
@@ -75,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="@string/p2refresh_refresh_lasttime"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>

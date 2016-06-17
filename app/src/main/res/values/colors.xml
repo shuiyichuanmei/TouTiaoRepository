@@ -3,8 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
-
+    <color name="rgba">#22000000</color>
+    <color name="f33">#f33</color>
     <color name="transparent">#00000000</color>
     <color name="greytow">#969696</color>
     <color name="DCDCDC">#dcdcdc</color>

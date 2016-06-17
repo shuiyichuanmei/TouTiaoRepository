@@ -1,5 +1,6 @@
 package com.shuiyi.app.toutiao;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private RadioButton rbOne, rbTwo, rbThree, rbFour;
-    private int num=4;
+    private int num = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         mFragments[0] = fragmentManager.findFragmentById(R.id.fragement_one);
         mFragments[1] = fragmentManager.findFragmentById(R.id.fragement_two);
         mFragments[2] = fragmentManager.findFragmentById(R.id.fragement_three);
+
         fragmentTransaction = fragmentManager.beginTransaction()
                 .hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2]);
         fragmentTransaction.show(mFragments[0]).commit();
         setFragmentIndicator();
+
     }
-
-
 
     private void setFragmentIndicator() {
 
@@ -43,11 +44,19 @@ public class MainActivity extends AppCompatActivity {
         rbOne = (RadioButton) findViewById(R.id.rbOne);
         rbTwo = (RadioButton) findViewById(R.id.rbTwo);
         rbThree = (RadioButton) findViewById(R.id.rbThree);
+
+        for (int i = 0; i < bottomRg.getChildCount(); i++) {
+            RadioButton rbtn = (RadioButton) bottomRg.getChildAt(i);
+            Drawable[] drawables = rbtn.getCompoundDrawables();
+            drawables[1].setBounds(0, 0, 50, 50);
+            rbtn.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
+
+        }
+
         rbOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mFragments[0].isVisible())
-                {
+                if (mFragments[0].isVisible()) {
                     fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[0]);
                     fragmentTransaction.show(mFragments[0]).commit();
                 }

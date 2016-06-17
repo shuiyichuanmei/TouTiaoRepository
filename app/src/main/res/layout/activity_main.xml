@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
     <fragment
         android:id="@+id/fragement_one"
         android:name="com.shuiyi.app.toutiao.TouTiaoFragment"
@@ -29,27 +30,33 @@
     <RadioGroup
         android:id="@+id/bottomRg"
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/top_shadow"
+        android:paddingTop="5dp"
+        >
 
         <RadioButton
             android:id="@+id/rbOne"
             style="@style/toolbar_button_style"
             android:checked="true"
             android:drawableTop="@drawable/main_tab1img"
-            android:text="头条" />
+            android:text="头条"
+            />
 
         <RadioButton
             android:id="@+id/rbTwo"
             style="@style/toolbar_button_style"
             android:drawableTop="@drawable/main_tab2img"
-            android:text="快餐" />
+            android:text="快餐"
+            />
 
         <RadioButton
             android:id="@+id/rbThree"
             style="@style/toolbar_button_style"
             android:drawableTop="@drawable/main_tab3img"
-            android:text="平台" />
+            android:text="平台"
+            />
 
     </RadioGroup>
 
