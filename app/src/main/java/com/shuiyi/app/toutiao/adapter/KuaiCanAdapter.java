@@ -37,10 +37,11 @@ public class KuaiCanAdapter extends MyBaseAdapter<KuaiCanBean> {
         TextView xfText = (TextView) ViewHolder.get(convertView, R.id.xfText);
         TextView txText = (TextView) ViewHolder.get(convertView, R.id.txText);
 
-        biaoti.setText(beans.get(position).getBiaoti());
-        txText.setText(beans.get(position).getTxText());
-        xfText.setText(beans.get(position).getXfText());
-        ImageLoader.getInstance().displayImage(beans.get(position).getImageUrl(), imgurl, options);
+
+        biaoti.setText(beans.get(position).getMingcheng());
+        txText.setText(beans.get(position).getSongcantixing());
+        xfText.setText(beans.get(position).getCankao());
+        ImageLoader.getInstance().displayImage(beans.get(position).getImgxiao(), imgurl, options);
         return convertView;
     }
 
