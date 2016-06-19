@@ -8,55 +8,49 @@ public class KuaiCanBean {
     }
 
     private String id;
-    private String Biaoti;
-    private String ImageUrl;
-    private String xfText;
-    private String txText;
-    private String createDate;
-    private String typeId;
+    private String mingcheng;
+    private String imgxiao;
+    private String cankao;
+    private String songcantixing;
 
     public String getId() {
         return id;
-    }
-
-    public String getBiaoti() {
-        return Biaoti;
-    }
-
-    public String getXfText() {
-        return xfText;
-    }
-
-    public String getTxText() {
-        return txText;
-    }
-
-    public String getImageUrl() {
-        return ImageUrl;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setBiaoti(String biaoti) {
-        this.Biaoti = biaoti;
+    public String getMingcheng() {
+        return mingcheng;
     }
 
-    public void setxfText(String xftext) {
-        this.xfText = xftext;
+    public void setMingcheng(String mingcheng) {
+        this.mingcheng = mingcheng;
     }
 
-    public void settxText(String txtext) {
-        this.txText = txtext;
+    public String getImgxiao() {
+        return imgxiao;
     }
 
-    public void setImageUrl(String imgurl) {
-        this.ImageUrl = imgurl;
+    public void setImgxiao(String imgxiao) {
+        this.imgxiao = imgxiao;
     }
 
-    public void setTypeId(String typeId) {
-        this.typeId = typeId;
+    public String getCankao() {
+        return cankao;
+    }
+
+    public void setCankao(String cankao) {
+        this.cankao = cankao;
+    }
+
+    public String getSongcantixing() {
+        return songcantixing;
+    }
+
+    public void setSongcantixing(String songcantixing) {
+        this.songcantixing = songcantixing;
     }
 }
 
