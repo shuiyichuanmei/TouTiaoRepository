@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imgUrl"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:contentDescription="@string/action_settings"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_stub" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/biaoti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="东方快餐"/>
+
+        <TextView
+            android:id="@+id/xfText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="消费参考:"/>
+
+        <TextView
+            android:id="@+id/txText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="送餐提醒:"/>
+
+    </LinearLayout>
+
+</LinearLayout>

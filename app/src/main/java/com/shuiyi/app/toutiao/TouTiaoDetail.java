@@ -40,13 +40,6 @@ public class TouTiaoDetail extends AppCompatActivity {
         initWebView();
     }
 
-    private void getData() {
-        //news = (NewsEntity) getIntent().getSerializableExtra("news");
-        news_url ="http://toutiao.ishowyou.cc/detail.aspx?id=9aeeb5e5-b0d4-47bf-b8e4-6b58c4dd8a88";
-        news_title ="dfdfdf";
-        news_source = "sdfsdfsdf";
-        news_date ="dfsdfsdf";
-    }
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
