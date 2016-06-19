@@ -7,17 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.shuiyi.app.toutiao.Server.KuaiCanJsonHttpResponseHandler;
-import com.shuiyi.app.toutiao.Server.TouTiaoJsonHttpResponseHandler;
+import com.shuiyi.app.toutiao.Server.KuaicanServer;
 import com.shuiyi.app.toutiao.adapter.KuaiCanAdapter;
 import com.shuiyi.app.toutiao.bean.KuaiCanBean;
-import com.shuiyi.app.toutiao.bean.TouTiaoBean;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
 import com.shuiyi.app.toutiao.view.CustomListView;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -55,8 +57,12 @@ public class KuaiCanFragment extends Fragment {
 //            addData(kc);
         }
     }
-
-
+    private void GetHttpData(JsonHttpResponseHandler jhrh) {
+        AsyncHttpUtil ahu = new AsyncHttpUtil();
+        RequestParams rp = new RequestParams();
+        rp.add("page", String.valueOf(pageIndex));
+        ahu.get("http://www.ishowyou.cc/qdkc/KuaicanHandler.ashx", rp, jhrh);
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -67,43 +73,43 @@ public class KuaiCanFragment extends Fragment {
         listView = (CustomListView) getActivity().findViewById(R.id.listView2);
         kcList = new ArrayList<KuaiCanBean>();
         kcAdapter = new KuaiCanAdapter(getActivity(), kcList);
-        KuaiCanJsonHttpResponseHandler kc = new KuaiCanJsonHttpResponseHandler() {
+        JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
             @Override
-            public void OnSuccess(ArrayList<KuaiCanBean> kclist) {
-                kcList.addAll(kclist);
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                Gson gson = new Gson();
+                ArrayList<KuaiCanBean> itemList= gson.fromJson(response.toString(),new TypeToken<ArrayList<KuaiCanBean>>(){}.getType());
+                kcList.addAll(itemList);
                 listView.setAdapter(kcAdapter);
             }
         };
-        addData(kc);
+        GetHttpData(kc);
         listView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 kcList.clear();
                 pageIndex = 1;
-                //KuaiCanBean.KuaiCanJsonHttpResponseHandler kc= new KuaiCanBean.KuaiCanJsonHttpResponseHandler();
-
-                KuaiCanJsonHttpResponseHandler kc = new KuaiCanJsonHttpResponseHandler() {
+                JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
                     @Override
-                    public void OnSuccess(ArrayList<KuaiCanBean> kclist) {
-                        kcList.addAll(kclist);
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        kcList.addAll(KuaicanServer.AnalyzeToList(response));
                         listView.onRefreshComplete();
                     }
                 };
-                addData(kc);
+                GetHttpData(kc);
             }
         });
         listView.setOnLoadListener(new CustomListView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 pageIndex++;
-                KuaiCanJsonHttpResponseHandler kc = new KuaiCanJsonHttpResponseHandler() {
+                JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
                     @Override
-                    public void OnSuccess(ArrayList<KuaiCanBean> kclist) {
-                        kcList.addAll(kclist);
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        kcList.addAll(KuaicanServer.AnalyzeToList(response));
                         listView.onLoadMoreComplete();
                     }
                 };
-                addData(kc);
+                GetHttpData(kc);
             }
         });
 
@@ -119,14 +125,6 @@ public class KuaiCanFragment extends Fragment {
                 startActivity(intent);
             }
         });
-    }
-
-
-    private void addData(JsonHttpResponseHandler jhrh) {
-        AsyncHttpUtil ahu = new AsyncHttpUtil();
-        RequestParams rp = new RequestParams();
-        rp.add("page", String.valueOf(pageIndex));
-        ahu.get("http://www.ishowyou.cc/qdkc/KuaicanHandler.ashx", rp, jhrh);
     }
 }
 
