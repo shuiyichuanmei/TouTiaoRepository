@@ -10,8 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.shuiyi.app.toutiao.Server.KuaicanServer;
-import com.shuiyi.app.toutiao.Server.TouTiaoServer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.shuiyi.app.toutiao.adapter.TouTiaoAdapter;
 import com.shuiyi.app.toutiao.bean.TouTiaoBean;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
@@ -22,6 +22,7 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import org.json.JSONArray;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -58,7 +59,12 @@ public class TouTiaoFragment extends Fragment {
 //            addData(tt);
         }
     }
-
+    private void addData(JsonHttpResponseHandler jhrh) {
+        AsyncHttpUtil ahu = new AsyncHttpUtil();
+        RequestParams rp = new RequestParams();
+        rp.add("page", String.valueOf(pageIndex));
+        ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -87,7 +93,10 @@ public class TouTiaoFragment extends Fragment {
         JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                ttList.addAll(TouTiaoServer.AnalyzeToList(response));
+                Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
+                ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
+                ttList.addAll(itemList);
                 listView.setAdapter(ttAdapter);
             }
         };
@@ -102,7 +111,10 @@ public class TouTiaoFragment extends Fragment {
                 JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        ttList.addAll(TouTiaoServer.AnalyzeToList(response));
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
+                        ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
+                        ttList.addAll(itemList);
                         listView.onRefreshComplete();
                     }
                 };
@@ -118,7 +130,10 @@ public class TouTiaoFragment extends Fragment {
                 JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        ttList.addAll(TouTiaoServer.AnalyzeToList(response));
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
+                        ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
+                        ttList.addAll(itemList);
                         listView.onLoadMoreComplete();
                     }
                 };
@@ -130,8 +145,6 @@ public class TouTiaoFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                System.out.println("position==" + position);
-                System.out.println("id==" + id);
                 TouTiaoBean item = (TouTiaoBean) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), TouTiaoDetail.class);
                 intent.putExtra("id", item.getId());
@@ -139,12 +152,5 @@ public class TouTiaoFragment extends Fragment {
             }
         });
 
-    }
-
-    private void addData(JsonHttpResponseHandler jhrh) {
-        AsyncHttpUtil ahu = new AsyncHttpUtil();
-        RequestParams rp = new RequestParams();
-        rp.add("page", String.valueOf(pageIndex));
-        ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
     }
 }

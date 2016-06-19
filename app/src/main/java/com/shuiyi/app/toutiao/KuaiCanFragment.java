@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.shuiyi.app.toutiao.Server.KuaicanServer;
 import com.shuiyi.app.toutiao.adapter.KuaiCanAdapter;
 import com.shuiyi.app.toutiao.bean.KuaiCanBean;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
@@ -91,7 +90,9 @@ public class KuaiCanFragment extends Fragment {
                 JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        kcList.addAll(KuaicanServer.AnalyzeToList(response));
+                        Gson gson = new Gson();
+                        ArrayList<KuaiCanBean> itemList= gson.fromJson(response.toString(),new TypeToken<ArrayList<KuaiCanBean>>(){}.getType());
+                        kcList.addAll(itemList);
                         listView.onRefreshComplete();
                     }
                 };
@@ -105,7 +106,9 @@ public class KuaiCanFragment extends Fragment {
                 JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        kcList.addAll(KuaicanServer.AnalyzeToList(response));
+                        Gson gson = new Gson();
+                        ArrayList<KuaiCanBean> itemList= gson.fromJson(response.toString(),new TypeToken<ArrayList<KuaiCanBean>>(){}.getType());
+                        kcList.addAll(itemList);
                         listView.onLoadMoreComplete();
                     }
                 };
@@ -117,8 +120,6 @@ public class KuaiCanFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                System.out.println("position==" + position);
-                System.out.println("id==" + id);
                 KuaiCanBean item = (KuaiCanBean) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), TouTiaoDetail.class);
                 intent.putExtra("id", item.getId());
