@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -60,8 +61,8 @@ public class KuaiCanDetail extends AppCompatActivity {
             webView.setWebChromeClient(new MyWebChromeClient());//设置加载进度
             webView.setWebViewClient(new MyWebViewClient());
             new MyAsnycTask().execute(kcs_url);
-        }
 
+        }
     }
 //    @Override
 //    public void onBackPressed() {
@@ -124,7 +125,16 @@ public class KuaiCanDetail extends AppCompatActivity {
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return super.shouldOverrideUrlLoading(view, url);
+            //调用拨号程序
+            if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+            else
+            {
+                return super.shouldOverrideUrlLoading(view, url);
+            }
         }
 
         @Override
