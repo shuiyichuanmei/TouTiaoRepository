@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <fragment
         android:id="@+id/fragement_one"
         android:name="com.shuiyi.app.toutiao.TouTiaoFragment"
@@ -59,5 +60,6 @@
             />
 
     </RadioGroup>
+
 
 </LinearLayout>

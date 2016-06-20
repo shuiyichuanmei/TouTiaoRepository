@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.shuiyi.app.toutiao.common.UpdateAppManager;
+
 
 public class MainActivity extends AppCompatActivity {
     private Fragment[] mFragments;
@@ -19,11 +21,15 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private RadioButton rbOne, rbTwo, rbThree, rbFour;
     private int num = 4;
-
+    private UpdateAppManager updateManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        updateManager = new UpdateAppManager(this);
+        updateManager.checkUpdateInfo();
 
         mFragments = new Fragment[3];
         fragmentManager = getSupportFragmentManager();
