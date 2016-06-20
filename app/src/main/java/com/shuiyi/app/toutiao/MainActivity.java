@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-//        updateManager = new UpdateAppManager(this);
-//        updateManager.checkUpdateInfo();
+        updateManager = new UpdateAppManager(this);
+        updateManager.checkUpdateInfo();
 
         mFragments = new Fragment[3];
         fragmentManager = getSupportFragmentManager();

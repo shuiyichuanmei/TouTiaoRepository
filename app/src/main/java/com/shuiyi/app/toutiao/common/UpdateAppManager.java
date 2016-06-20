@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,6 +15,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -21,7 +25,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.shuiyi.app.toutiao.R;
+import com.shuiyi.app.toutiao.bean.TouTiaoBean;
+import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class UpdateAppManager {
     // 文件分隔符
@@ -38,7 +52,7 @@ public class UpdateAppManager {
     private Context context;
     private String message = "检测到本程序有新版本发布，建议您更新！";
     // 以华为天天聊hotalk.apk为例
-    private String spec = "http://222.42.1.209:81/1Q2W3E4R5T6Y7U8I9O0P1Z2X3C4V5B/mt.hotalk.com:8080/release/hotalk1.9.17.0088.apk";
+    private String spec = "";
     // 下载应用的对话框
     private Dialog dialog;
     // 下载应用的进度条
@@ -68,10 +82,45 @@ public class UpdateAppManager {
     };
 
     /**
+     * 获取版本号
+     *
+     * @return 当前应用的版本号
+     */
+    public String getVersion() {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            String version = info.versionName;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "获取版本号失败";
+        }
+    }
+
+    /**
      * 检测应用更新信息
      */
     public void checkUpdateInfo() {
-        showNoticeDialog();
+        AsyncHttpUtil ahu = new AsyncHttpUtil();
+
+        JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    double versionNum = (double) response.get("versionNum");
+                    String downLoadUrl = (String) response.get("downLoadUrl");
+                    double curVersionNum = Double.parseDouble(getVersion());
+                    System.out.println(versionNum + downLoadUrl + curVersionNum);
+                    if (versionNum > curVersionNum) {
+                        spec = downLoadUrl;
+                        showNoticeDialog();
+                    }
+                } catch (Exception ex) {
+                }
+            }
+        };
+        ahu.get("http://toutiao.ishowyou.cc/Server/UpdateAppHandler.ashx", null, jhrh);
     }
 
     /**
