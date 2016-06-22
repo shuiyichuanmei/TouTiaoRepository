@@ -4,67 +4,62 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Hey on 2016/6/19.
- */
 @SuppressLint("JavascriptInterface")
-public class KuaiCanDetail extends AppCompatActivity {
+public class TouTiaoDetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
-    private TextView textView;
-    private String kcs_url;
+    private String news_url;
+    private ImageButton backButton;
     WebView webView;
-    private ImageButton imageButton;
-    private int nbb = 2;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.kuaicandetail);
-
+        setContentView(R.layout.toutiaodetail);
         //setNeedBackGesture(true);//设置需要手势监听
+
         Intent intent1 = getIntent();
-        kcs_url = "http://www.ishowyou.cc/qdkc/Telduan/apps_WaiMaiDetail.aspx?spid=" + intent1.getStringExtra("id");
+        news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + intent1.getStringExtra("id");
         initView();
         initWebView();
-        textView.setText(intent1.getStringExtra("mingcheng"));
-    }
 
+    }
 
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
-        textView = (TextView) this.findViewById(R.id.txtTitle);
-        imageButton = (ImageButton) this.findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        backButton=(ImageButton)this.findViewById(R.id.imageButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
     }
 
     private void initWebView() {
         webView = (WebView) findViewById(R.id.wb_details);
-        if (!TextUtils.isEmpty(kcs_url)) {
+        if (!TextUtils.isEmpty(news_url)) {
             WebSettings settings = webView.getSettings();
             settings.setJavaScriptEnabled(true);//设置可以运行JS脚本
             //settings.setTextZoom(100);//设置页面的文本缩放百分比。默认值是100。
-            settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
             settings.setUseWideViewPort(true); //打开页面时， 自适应屏幕??
             settings.setLoadWithOverviewMode(true);//缩小内容以适合屏幕宽度
             settings.setSupportZoom(false);// 用于设置webview放大
@@ -73,10 +68,10 @@ public class KuaiCanDetail extends AppCompatActivity {
             //webView.addJavascriptInterface(new JavascriptInterface(getApplicationContext()),"imagelistner");// 添加js交互接口类，并起别名 imagelistner
             webView.setWebChromeClient(new MyWebChromeClient());//设置加载进度
             webView.setWebViewClient(new MyWebViewClient());
-            new MyAsnycTask().execute(kcs_url);
-
+            new MyAsnycTask().execute(news_url);
         }
     }
+
 //    @Override
 //    public void onBackPressed() {
 //        super.onBackPressed();
@@ -93,7 +88,7 @@ public class KuaiCanDetail extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String data) {
-            webView.loadUrl(kcs_url);
+            webView.loadUrl(news_url);
         }
     }
 
@@ -136,17 +131,11 @@ public class KuaiCanDetail extends AppCompatActivity {
         }
     }
 
+    // 监听
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            //调用拨号程序
-            if (url.startsWith("mailto:") || url.startsWith("geo:") || url.startsWith("tel:")) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-                return true;
-            } else {
-                return super.shouldOverrideUrlLoading(view, url);
-            }
+            return super.shouldOverrideUrlLoading(view, url);
         }
 
         @Override
@@ -182,5 +171,4 @@ public class KuaiCanDetail extends AppCompatActivity {
             super.onProgressChanged(view, newProgress);
         }
     }
-
 }

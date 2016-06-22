@@ -121,7 +121,7 @@ public class KuaiCanFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 KuaiCanBean item = (KuaiCanBean) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), KuaiCanDetail.class);
+                Intent intent = new Intent(getActivity(), KuaiCanDetailActivity.class);
                 intent.putExtra("id", item.getId());
                 intent.putExtra("mingcheng", item.getMingcheng());
                 startActivity(intent);

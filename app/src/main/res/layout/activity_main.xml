@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragement_one"
-        android:name="com.shuiyi.app.toutiao.xinwenfragment"
+        android:name="com.shuiyi.app.toutiao.XinWenFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="10"

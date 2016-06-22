@@ -29,7 +29,7 @@
             android:textSize="25sp" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/btnShoucang"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@drawable/btn_click_bg"

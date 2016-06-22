@@ -35,29 +35,19 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by wang on 2016/6/22.
  */
-public class xinwenfragment extends Fragment {
+public class XinWenFragment extends Fragment {
 
     private ImageButton searchbtn;
+    private ImageButton btnShoucang;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         initdata();
         super.onCreate(savedInstanceState);
-//        searchbtn = (ImageButton) getActivity().findViewById(R.id.imageButton);
-//        searchbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    Intent intent = new Intent(getActivity(), SearchActivity.class);
-//                    startActivity(intent);
-//                    //getActivity().overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-//                } catch (Exception ex) {
-//                    Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
     }
 
     @Nullable
@@ -69,6 +59,7 @@ public class xinwenfragment extends Fragment {
         }
         return contentview;
     }
+
     private FragmentManager fragmentManager;
 
     private List<Fragment> xinwen_framentlist;
@@ -76,20 +67,20 @@ public class xinwenfragment extends Fragment {
     //初始化数据
     private void initdata() {
         xinwen_framentlist = new ArrayList<>();
-        TouTiaoFragment toutiao=new TouTiaoFragment();
-        Bundle bundletoutiao=new Bundle();
+        TouTiaoFragment toutiao = new TouTiaoFragment();
+        Bundle bundletoutiao = new Bundle();
         bundletoutiao.putString("xinwendaohang", "头条");
         toutiao.setArguments(bundletoutiao);
         xinwen_framentlist.add(toutiao);
 
-        TouTiaoFragment yule=new TouTiaoFragment();
-        Bundle bundleyule=new Bundle();
+        TouTiaoFragment yule = new TouTiaoFragment();
+        Bundle bundleyule = new Bundle();
         bundleyule.putString("xinwendaohang", "娱乐");
         yule.setArguments(bundleyule);
         xinwen_framentlist.add(yule);
 
-        TouTiaoFragment tiyu=new TouTiaoFragment();
-        Bundle bundletiyu=new Bundle();
+        TouTiaoFragment tiyu = new TouTiaoFragment();
+        Bundle bundletiyu = new Bundle();
         bundletiyu.putString("xinwendaohang", "体育");
         tiyu.setArguments(bundletiyu);
         xinwen_framentlist.add(tiyu);
@@ -102,6 +93,25 @@ public class xinwenfragment extends Fragment {
         //System.out.println(getFragmentManager().getFragments().size()+"    ------------------------------------------");
 
         View view = inflater.inflate(R.layout.xinwenfragment, null, false);
+
+
+        searchbtn = (ImageButton) view.findViewById(R.id.imageButton);
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnShoucang = (ImageButton) view.findViewById(R.id.btnShoucang);
+        btnShoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //新闻导航栏控件
         final RadioGroup xinwen_Rradio = (RadioGroup) view.findViewById(R.id.xinwen_radiogroup);
@@ -163,7 +173,7 @@ public class xinwenfragment extends Fragment {
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-				/* 伴随着ViewPager的滑动，滚动指示条TextView */
+                /* 伴随着ViewPager的滑动，滚动指示条TextView */
                 // 获取TextView在其父容器LinearLayout中的布局参数
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) xinwen_indicator
                         .getLayoutParams();
@@ -179,7 +189,6 @@ public class xinwenfragment extends Fragment {
 
         return view;
     }
-
 
 
     //新闻viewpager的填充类

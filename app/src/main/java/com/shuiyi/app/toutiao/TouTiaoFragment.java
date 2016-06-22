@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -129,7 +127,7 @@ public class TouTiaoFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 TouTiaoBean item = (TouTiaoBean) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), TouTiaoDetail.class);
+                Intent intent = new Intent(getActivity(), TouTiaoDetailActivity.class);
                 intent.putExtra("id", item.getId());
                 startActivity(intent);
             }
