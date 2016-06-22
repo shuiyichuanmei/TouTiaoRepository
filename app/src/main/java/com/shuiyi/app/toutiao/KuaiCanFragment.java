@@ -123,6 +123,7 @@ public class KuaiCanFragment extends Fragment {
                 KuaiCanBean item = (KuaiCanBean) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), KuaiCanDetail.class);
                 intent.putExtra("id", item.getId());
+                intent.putExtra("mingcheng", item.getMingcheng());
                 startActivity(intent);
             }
         });

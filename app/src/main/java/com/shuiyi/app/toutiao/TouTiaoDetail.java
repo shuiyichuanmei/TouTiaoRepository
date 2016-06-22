@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class TouTiaoDetail extends AppCompatActivity {
     private ProgressBar progressBar;
     private String news_url;
+    private ImageButton backButton;
     WebView webView;
 
     @Override
@@ -35,11 +37,20 @@ public class TouTiaoDetail extends AppCompatActivity {
         news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + intent1.getStringExtra("id");
         initView();
         initWebView();
+
     }
 
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
+        backButton=(ImageButton)this.findViewById(R.id.imageButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     private void initWebView() {

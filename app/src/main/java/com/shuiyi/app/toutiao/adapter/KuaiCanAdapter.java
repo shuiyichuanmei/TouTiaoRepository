@@ -39,8 +39,8 @@ public class KuaiCanAdapter extends MyBaseAdapter<KuaiCanBean> {
 
 
         biaoti.setText(beans.get(position).getMingcheng());
-        txText.setText(beans.get(position).getSongcantixing());
-        xfText.setText(beans.get(position).getCankao());
+        txText.setText("送餐提醒:"+beans.get(position).getSongcantixing());
+        xfText.setText("消费餐考:"+beans.get(position).getCankao());
         ImageLoader.getInstance().displayImage(beans.get(position).getImgxiao(), imgurl, options);
         return convertView;
     }

@@ -14,6 +14,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,21 +29,32 @@ public class KuaiCanDetail extends AppCompatActivity {
     private TextView textView;
     private String kcs_url;
     WebView webView;
+    private ImageButton imageButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kuaicandetail);
+
         //setNeedBackGesture(true);//设置需要手势监听
         Intent intent1 = getIntent();
-        kcs_url = "http://www.ishowyou.cc/qdkc/Telduan/sj_WaiMaidetail.aspx?spid=" + intent1.getStringExtra("id");
+        kcs_url = "http://www.ishowyou.cc/qdkc/Telduan/apps_WaiMaiDetail.aspx?spid=" + intent1.getStringExtra("id");
         initView();
         initWebView();
-
+        textView.setText(intent1.getStringExtra("mingcheng"));
     }
+
 
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
+        textView = (TextView)this.findViewById(R.id.txtTitle);
+        imageButton = (ImageButton)this.findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void initWebView() {

@@ -39,6 +39,22 @@
             android:src="@drawable/menu_shoucang" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab1"/><TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab2"/><TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tab3"/>
+    </LinearLayout>
 
     <com.shuiyi.app.toutiao.view.CustomListView
         android:id="@+id/listView"
@@ -49,5 +65,24 @@
         android:dividerHeight="1dp"
 
         android:scrollbars="vertical"></com.shuiyi.app.toutiao.view.CustomListView>
+    <com.shuiyi.app.toutiao.view.CustomListView
+        android:id="@+id/listView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:divider="@color/gray_line"
+        android:dividerHeight="1dp"
+
+        android:scrollbars="vertical"></com.shuiyi.app.toutiao.view.CustomListView>
+    <com.shuiyi.app.toutiao.view.CustomListView
+        android:id="@+id/listView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:divider="@color/gray_line"
+        android:dividerHeight="1dp"
+
+        android:scrollbars="vertical"></com.shuiyi.app.toutiao.view.CustomListView>
+
 
 </LinearLayout>
