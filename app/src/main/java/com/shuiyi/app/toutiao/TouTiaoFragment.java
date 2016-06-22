@@ -29,7 +29,6 @@ import java.util.ArrayList;
  * Created by wang on 2016/6/7.
  */
 public class TouTiaoFragment extends Fragment {
-    private ImageButton searchbtn;
     private CustomListView listView;
     private TouTiaoAdapter ttAdapter = null;
     private ArrayList<TouTiaoBean> ttList = null;
@@ -38,7 +37,9 @@ public class TouTiaoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.toutiao, container, false);
+        View view= inflater.inflate(R.layout.toutiao, container, false);
+        findView(view);
+        return view;
     }
 
     @Override
@@ -65,29 +66,11 @@ public class TouTiaoFragment extends Fragment {
         rp.add("page", String.valueOf(pageIndex));
         ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
     }
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-        searchbtn = (ImageButton) getActivity().findViewById(R.id.imageButton);
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(getActivity(), SearchActivity.class);
-                    startActivity(intent);
-                    //getActivity().overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                } catch (Exception ex) {
-                    Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        findView();
-    }
 
-    private void findView() {
+    private void findView(View view) {
 
-        listView = (CustomListView) getActivity().findViewById(R.id.listView);
+        listView = (CustomListView) view.findViewById(R.id.listView);
         ttList = new ArrayList<TouTiaoBean>();
         ttAdapter = new TouTiaoAdapter(getActivity(), ttList);
         JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
