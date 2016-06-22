@@ -30,6 +30,7 @@ public class KuaiCanDetail extends AppCompatActivity {
     private String kcs_url;
     WebView webView;
     private ImageButton imageButton;
+    private int nbb = 2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +48,8 @@ public class KuaiCanDetail extends AppCompatActivity {
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
-        textView = (TextView)this.findViewById(R.id.txtTitle);
-        imageButton = (ImageButton)this.findViewById(R.id.imageButton);
+        textView = (TextView) this.findViewById(R.id.txtTitle);
+        imageButton = (ImageButton) this.findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,17 +135,16 @@ public class KuaiCanDetail extends AppCompatActivity {
             context.startActivity(intent);
         }
     }
+
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             //调用拨号程序
-            if (url.startsWith("mailto:") || url.startsWith("geo:") ||url.startsWith("tel:")) {
+            if (url.startsWith("mailto:") || url.startsWith("geo:") || url.startsWith("tel:")) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
                 return true;
-            }
-            else
-            {
+            } else {
                 return super.shouldOverrideUrlLoading(view, url);
             }
         }
