@@ -29,8 +29,7 @@ import java.util.ArrayList;
  * Created by wang on 2016/6/7.
  */
 public class TouTiaoFragment extends Fragment {
-    private ImageButton searchbtn;
-    private CustomListView listView, listView2, listView3;
+    private CustomListView listView;
     private TouTiaoAdapter ttAdapter = null;
     private ArrayList<TouTiaoBean> ttList = null;
     private int pageIndex = 1;
@@ -38,7 +37,9 @@ public class TouTiaoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.toutiao, container, false);
+        View view= inflater.inflate(R.layout.toutiao, container, false);
+        findView(view);
+        return view;
     }
 
     @Override
@@ -59,7 +60,6 @@ public class TouTiaoFragment extends Fragment {
 //            addData(tt);
         }
     }
-
     private void addData(JsonHttpResponseHandler jhrh) {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();
@@ -67,38 +67,17 @@ public class TouTiaoFragment extends Fragment {
         ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        searchbtn = (ImageButton) getActivity().findViewById(R.id.imageButton);
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(getActivity(), SearchActivity.class);
-                    startActivity(intent);
-                    //getActivity().overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                } catch (Exception ex) {
-                    Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        findView();
-    }
 
-    private void findView() {
+    private void findView(View view) {
 
-        listView = (CustomListView) getActivity().findViewById(R.id.listView);
-        listView2 = (CustomListView) getActivity().findViewById(R.id.listView2);
-        listView3 = (CustomListView) getActivity().findViewById(R.id.listView3);
+        listView = (CustomListView) view.findViewById(R.id.listView);
         ttList = new ArrayList<TouTiaoBean>();
         ttAdapter = new TouTiaoAdapter(getActivity(), ttList);
         JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Gson gson = new Gson();
-                Type type = new TypeToken<ArrayList<TouTiaoBean>>() {
-                }.getType();
+                Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
                 ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                 ttList.addAll(itemList);
                 listView.setAdapter(ttAdapter);
@@ -116,8 +95,7 @@ public class TouTiaoFragment extends Fragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new Gson();
-                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {
-                        }.getType();
+                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onRefreshComplete();
@@ -136,8 +114,7 @@ public class TouTiaoFragment extends Fragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new Gson();
-                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {
-                        }.getType();
+                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onLoadMoreComplete();

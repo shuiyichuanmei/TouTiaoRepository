@@ -1,14 +1,9 @@
 package com.shuiyi.app.toutiao;
 
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTitleStrip;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v4.app.Fragment;
@@ -16,8 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.shuiyi.app.toutiao.common.UpdateAppManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,12 +20,16 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private RadioButton rbOne, rbTwo, rbThree, rbFour;
-
-
+    private int num = 4;
+    private UpdateAppManager updateManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        updateManager = new UpdateAppManager(this);
+        updateManager.checkUpdateInfo();
 
         mFragments = new Fragment[3];
         fragmentManager = getSupportFragmentManager();
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setFragmentIndicator();
 
     }
-
 
     private void setFragmentIndicator() {
 
@@ -71,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         bottomRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
