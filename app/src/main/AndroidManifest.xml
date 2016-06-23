@@ -52,7 +52,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustNothing"></activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".DengluActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustNothing"></activity>

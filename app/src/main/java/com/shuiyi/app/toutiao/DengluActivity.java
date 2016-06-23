@@ -1,6 +1,5 @@
 package com.shuiyi.app.toutiao;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.shuiyi.app.toutiao.common.Common;
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * Created by wang on 2016/6/22.
  */
-public class LoginActivity extends AppCompatActivity {
+public class DengluActivity extends AppCompatActivity {
     private int yzm;
     private EditText txtTel;
     private EditText txtYzm;
@@ -77,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String tel = txtTel.getText().toString();
                 if (!isMobileNO(tel)) {
-                    Toast.makeText(LoginActivity.this, "手机号格式不正确", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DengluActivity.this, "手机号格式不正确", Toast.LENGTH_LONG).show();
                     return;
                 }
                 btnSendYzm.setEnabled(false);
