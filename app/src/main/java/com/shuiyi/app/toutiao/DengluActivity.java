@@ -9,6 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.shuiyi.app.toutiao.bean.TouTiaoBean;
+import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 /**
  * Created by wang on 2016/6/22.
  */
@@ -18,13 +31,13 @@ public class DengluActivity extends AppCompatActivity {
     private EditText txtYzm;
     private Button btnLogin;
     private Button btnSendYzm;
-    private int daojishi = 3;
+    private int daojishi = 5;
     private Handler handler = new Handler();
     private Runnable myRunnable = new Runnable() {
         public void run() {
             daojishi--;
             if (daojishi <= 0) {
-                daojishi = 3;
+                daojishi = 5;
                 btnSendYzm.setText("获取验证码");
                 btnSendYzm.setEnabled(true);
             } else {
@@ -33,26 +46,14 @@ public class DengluActivity extends AppCompatActivity {
             }
         }
     };
-    private Handler handlerSms = new Handler();
-    private Runnable myRunnableSms = new Runnable() {
-        public void run() {
-            String tel = txtTel.getText().toString();
-            //Common.SendSms(tel, "SMS_5016100", "{\"code\":\"" + yzm + "\"}");
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         InitView();
-        System.out.println("-----------------------sdfdsf-");
-
     }
 
-    /**
-     * 验证手机格式
-     */
     public static boolean isMobileNO(String mobiles) {
         String telRegex = "[1][3578]\\d{9}";
         if (TextUtils.isEmpty(mobiles))
@@ -77,9 +78,19 @@ public class DengluActivity extends AppCompatActivity {
                 }
                 btnSendYzm.setEnabled(false);
                 yzm = (int) (100000 + Math.random() * (999999 - 100000));
-                //handlerSms.postDelayed(myRunnableSms, 0);
-                new Thread(myRunnableSms).start();
-                //handler.postDelayed(myRunnable, 0);
+                AsyncHttpUtil ahu = new AsyncHttpUtil();
+                RequestParams rp = new RequestParams();
+                rp.add("ft", "sms");
+                rp.add("tel", tel);
+                rp.add("yzm", String.valueOf(yzm));
+                ahu.get("http://192.168.1.99:885/Server/UserHandler.ashx", rp, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        if (statusCode != 200) {
+                            Toast.makeText(DengluActivity.this, "验证码发送失败，请稍后重试。", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
         });
 
