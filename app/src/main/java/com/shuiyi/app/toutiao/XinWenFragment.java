@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.shuiyi.app.toutiao.common.Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +100,12 @@ public class XinWenFragment extends Fragment {
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!Common.isDenglu(getActivity()))
+                {
+                    Intent intent = new Intent(getActivity(), DengluActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
