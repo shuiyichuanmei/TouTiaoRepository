@@ -43,7 +43,7 @@
             android:checked="true"
             android:drawableTop="@drawable/main_tab1img"
             android:text="头条"
-            />
+            android:elegantTextHeight="false" />
 
         <RadioButton
             android:id="@+id/rbTwo"

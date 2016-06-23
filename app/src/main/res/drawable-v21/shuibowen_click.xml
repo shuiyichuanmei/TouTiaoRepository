@@ -1,0 +1,32 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#999"
+    >//水波纹的颜色
+    <item>
+        <selector>
+            <item android:state_enabled="false">
+                <shape>
+                    <corners android:radius="2dp"></corners>
+                    <solid android:color="@color/black"></solid>
+                </shape>
+            </item>
+            <item android:state_pressed="true">
+                <shape>
+                    <corners android:radius="2dp"></corners>
+                    <solid android:color="@color/DCDCDC"></solid>
+                </shape>
+            </item>
+            <item android:state_pressed="false">
+                <shape>
+                    <corners android:radius="2dp"></corners>
+                    <solid android:color="@null"></solid>
+                </shape>
+            </item>
+            <item android:state_single="true">
+                <shape>
+                    <corners android:radius="2dp"></corners>
+                    <solid android:color="@color/DCDCDC"></solid>
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

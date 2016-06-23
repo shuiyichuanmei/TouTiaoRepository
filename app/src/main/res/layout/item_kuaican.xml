@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/imgUrl"
@@ -16,26 +16,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
+
 
         <TextView
             android:id="@+id/biaoti"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20sp"
-            android:text="东方快餐"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/xfText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="消费参考:"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txText"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="送餐提醒:"
+                android:textColor="@color/ff6600" />
+
+
+            <TextView
+                android:id="@+id/xfText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="送餐提醒:"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消费参考:"
+                android:textColor="@color/ff6600" />
+
+            <TextView
+                android:id="@+id/txText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </LinearLayout>
 
