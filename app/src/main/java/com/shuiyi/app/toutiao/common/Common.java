@@ -18,13 +18,29 @@ public class Common {
     }
 
     public static boolean isDenglu(Context context) {
-        preferences = context.getSharedPreferences("toutiao", Activity.MODE_PRIVATE);
-        editor = preferences.edit();
-        String tel = preferences.getString("tel", "");
-        if (tel == null ||"".equals(tel)) {
+        String tel = getSharedPreferences(context, "tel");
+        if (tel == null || "".equals(tel)) {
             return false;
         } else {
             return true;
         }
+    }
+
+    public static void setSharedPreferences(Context context, String key, String value) {
+        preferences = context.getSharedPreferences("toutiao", Activity.MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static String getSharedPreferences(Context context, String key) {
+        preferences = context.getSharedPreferences("toutiao", Activity.MODE_PRIVATE);
+        return preferences.getString(key, "");
+    }
+    public static void removeSharedPreferences(Context context, String key) {
+        preferences = context.getSharedPreferences("toutiao", Activity.MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.remove(key);
+        editor.commit();
     }
 }

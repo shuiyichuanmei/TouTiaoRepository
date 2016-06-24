@@ -100,11 +100,8 @@ public class XinWenFragment extends Fragment {
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!Common.isDenglu(getActivity()))
-                {
-                    Intent intent = new Intent(getActivity(), DengluActivity.class);
-                    startActivity(intent);
-                    return;
+                if (Common.isDenglu(getActivity())) {
+                    Common.removeSharedPreferences(getActivity(), "tel");
                 }
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
@@ -115,7 +112,12 @@ public class XinWenFragment extends Fragment {
         btnShoucang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DengluActivity.class);
+                if (!Common.isDenglu(getActivity())) {
+                    Intent intent = new Intent(getActivity(), DengluActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                Intent intent = new Intent(getActivity(), Welcome.class);
                 startActivity(intent);
             }
         });
