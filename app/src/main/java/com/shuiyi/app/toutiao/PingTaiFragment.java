@@ -1,7 +1,7 @@
 package com.shuiyi.app.toutiao;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,27 +24,25 @@ public class PingTaiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.kuaican, container, false);
+        return inflater.inflate(R.layout.pingtai, container, false);
 
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-
-    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         findView();
     }
+
     private void findView() {
-        DongFang=(LinearLayout) getActivity().findViewById(R.id.dongfang);
+        DongFang = (LinearLayout) getActivity().findViewById(R.id.dongfang);
         DongFang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PingTaiDetailActivity.class);
-//                startActivity(intent);
+                intent.putExtra("url", "");//这块直接写要打开的url
+                intent.putExtra("mingcheng", "东方快餐");
+                startActivity(intent);
             }
         });
     }

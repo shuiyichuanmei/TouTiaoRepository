@@ -38,7 +38,7 @@ public class PingTaiDetailActivity extends AppCompatActivity {
 
         //setNeedBackGesture(true);//设置需要手势监听
         Intent intent1 = getIntent();
-        pt_url = "http://www.ishowyou.cc/qdkc/Telduan/apps_WaiMaiDetail.aspx?spid=" + intent1.getStringExtra("id");
+        pt_url = intent1.getStringExtra("url");
         initView();
         initWebView();
         textView.setText(intent1.getStringExtra("mingcheng"));
