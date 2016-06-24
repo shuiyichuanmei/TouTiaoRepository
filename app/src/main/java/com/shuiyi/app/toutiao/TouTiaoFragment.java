@@ -97,6 +97,8 @@ public class TouTiaoFragment extends Fragment {
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onRefreshComplete();
+                        System.out.println("dfdfdfdfdfdfdfdfdfd");
+
                     }
                 };
 
