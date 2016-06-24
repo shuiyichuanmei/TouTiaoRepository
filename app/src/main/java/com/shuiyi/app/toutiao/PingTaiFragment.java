@@ -19,7 +19,7 @@ import static android.app.PendingIntent.getActivity;
  * Created by wang on 2016/6/7.
  */
 public class PingTaiFragment extends Fragment {
-    private LinearLayout DongFang;
+    private LinearLayout DongFang, DaFu, ZGHJ, SJXNB;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,8 +40,38 @@ public class PingTaiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PingTaiDetailActivity.class);
-                intent.putExtra("url", "");//这块直接写要打开的url
-                intent.putExtra("mingcheng", "东方快餐");
+                intent.putExtra("url", "http://dongfang.ishowyou.cc/index.aspx");//这块直接写要打开的url
+                intent.putExtra("mingcheng", "东方快餐网上订餐");
+                startActivity(intent);
+            }
+        });
+        DaFu = (LinearLayout) getActivity().findViewById(R.id.dafu);
+        DaFu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PingTaiDetailActivity.class);
+                intent.putExtra("url", "http://www.ishowyou.cc/dfkc/index.aspx");//这块直接写要打开的url
+                intent.putExtra("mingcheng", "大福春艳在线外卖");
+                startActivity(intent);
+            }
+        });
+        SJXNB = (LinearLayout) getActivity().findViewById(R.id.sjxnb);
+        SJXNB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PingTaiDetailActivity.class);
+                intent.putExtra("url", "http://www.ishowyou.cc/sjxnb/index.aspx");//这块直接写要打开的url
+                intent.putExtra("mingcheng", "四季鲜奶吧");
+                startActivity(intent);
+            }
+        });
+        ZGHJ = (LinearLayout) getActivity().findViewById(R.id.zghj);
+        ZGHJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PingTaiDetailActivity.class);
+                intent.putExtra("url", "http://www.ishowyou.cc/zghjbq/default.aspx");//这块直接写要打开的url
+                intent.putExtra("mingcheng", "宝清中国黄金");
                 startActivity(intent);
             }
         });

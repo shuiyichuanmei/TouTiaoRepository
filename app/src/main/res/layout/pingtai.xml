@@ -87,10 +87,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/dafu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/shuibowen_click">
 
         <ImageView
             android:layout_width="70dp"
@@ -139,10 +144,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/sjxnb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/shuibowen_click">
 
         <ImageView
             android:layout_width="70dp"
@@ -191,10 +201,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/zghj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/shuibowen_click">
 
         <ImageView
             android:layout_width="70dp"
