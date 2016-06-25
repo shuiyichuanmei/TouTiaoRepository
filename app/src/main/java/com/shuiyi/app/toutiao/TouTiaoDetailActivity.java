@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebChromeClient;
@@ -15,17 +18,50 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.shuiyi.app.toutiao.common.Common;
+import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
+import com.shuiyi.app.toutiao.view.MyWebView;
+import com.shuiyi.app.toutiao.view.ScrollInterface;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 @SuppressLint("JavascriptInterface")
 public class TouTiaoDetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private String news_url;
+    private int jifen;
+    private String jiFenId;
+    private String tid;
+    private String tel;
     private ImageButton backButton;
-    WebView webView;
+    private Button btnGetJiFen;
+    MyWebView webView;
+    int daojishi = 3;
+    private Handler handler = new Handler();
+    private Runnable myRunnable = new Runnable() {
+        public void run() {
+            if (daojishi <= 0) {
+                daojishi = 3;
+                btnGetJiFen.setEnabled(true);
+                btnGetJiFen.setText("领取" + jifen + "积分");
+            } else {
+                btnGetJiFen.setText("领取" + jifen + "积分(" + daojishi + ")");
+                handler.postDelayed(this, 1000);
+            }
+            daojishi--;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +70,66 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         //setNeedBackGesture(true);//设置需要手势监听
 
         Intent intent1 = getIntent();
-        news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + intent1.getStringExtra("id");
+        tid = intent1.getStringExtra("id");
+        news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + tid;
+        tel = Common.getSharedPreferences(TouTiaoDetailActivity.this, "tel");
+
         initView();
         initWebView();
-
     }
 
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
-        backButton=(ImageButton)this.findViewById(R.id.imageButton);
+        backButton = (ImageButton) this.findViewById(R.id.imageButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
+        btnGetJiFen = (Button) this.findViewById(R.id.btnGetJiFen);
+        btnGetJiFen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!Common.isDenglu(TouTiaoDetailActivity.this)) {
+                    Intent intent = new Intent(TouTiaoDetailActivity.this, DengluActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                tel = Common.getSharedPreferences(TouTiaoDetailActivity.this, "tel");
+                AsyncHttpUtil ahu = new AsyncHttpUtil();
+                RequestParams rp = new RequestParams();
+                rp.add("ft", "add");
+                rp.add("tel", tel);
+                rp.add("type", "头条广告");
+                rp.add("jfid", jiFenId);
+                ahu.get("http://192.168.31.109:88/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        if (statusCode != 200) {
+                            Toast.makeText(TouTiaoDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        try {
+                            String success = response.getString("success");
+                            String msg = response.getString("msg");
+                            if (success.equals("true")) {
+                                btnGetJiFen.setEnabled(false);
+                                btnGetJiFen.setText("已领取");
+                            } else {
+                                Toast.makeText(TouTiaoDetailActivity.this, msg, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception ex) {
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void initWebView() {
-        webView = (WebView) findViewById(R.id.wb_details);
+        webView = (MyWebView) findViewById(R.id.wb_details);
         if (!TextUtils.isEmpty(news_url)) {
             WebSettings settings = webView.getSettings();
             settings.setJavaScriptEnabled(true);//设置可以运行JS脚本
@@ -146,6 +221,35 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
             //addImageClickListner();
             progressBar.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
+            AsyncHttpUtil ahu = new AsyncHttpUtil();
+            RequestParams rp = new RequestParams();
+            rp.add("ft", "get");
+            rp.add("tid", tid);
+            rp.add("type", "头条广告");
+            rp.add("tel", tel);
+            ahu.get("http://192.168.31.109:88/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    if (statusCode != 200) {
+                        Toast.makeText(TouTiaoDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    try {
+                        String success = response.getString("success");
+                        if (success.equals("true")) {
+                            jifen = response.getInt("jifennum");
+                            jiFenId = response.getString("jifenid");
+                            btnGetJiFen.setVisibility(View.VISIBLE);
+                            handler.postDelayed(myRunnable, 0);
+                        } else if (success.equals("chongfu")) {
+                            btnGetJiFen.setVisibility(View.VISIBLE);
+                            btnGetJiFen.setEnabled(false);
+                            btnGetJiFen.setText("已领取");
+                        }
+                    } catch (Exception ex) {
+                    }
+                }
+            });
         }
 
         @Override

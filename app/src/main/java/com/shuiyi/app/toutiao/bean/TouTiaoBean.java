@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * Created by wang on 2016/6/4.
  */
 public class TouTiaoBean {
-    public TouTiaoBean()
-    {
+    public TouTiaoBean() {
     }
+
     private String id;
 
     private String typeId;

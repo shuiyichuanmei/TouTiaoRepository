@@ -62,7 +62,8 @@ public class TouTiaoFragment extends Fragment {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();
         rp.add("page", String.valueOf(pageIndex));
-        ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
+        //ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
+        ahu.get("http://192.168.31.109:88/Server/NewsHandler.ashx", rp, jhrh);
     }
 
 
@@ -97,8 +98,6 @@ public class TouTiaoFragment extends Fragment {
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onRefreshComplete();
-                        System.out.println("dfdfdfdfdfdfdfdfdfd");
-
                     }
                 };
 
