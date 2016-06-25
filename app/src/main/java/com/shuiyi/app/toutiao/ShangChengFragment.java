@@ -83,7 +83,7 @@ public class ShangChengFragment extends Fragment {
         gridView = (GridView) getActivity().findViewById(R.id.gridview);
         scList = new ArrayList<ShangChengBean>();
         scAdapter = new ShangChengAdapter(getActivity(), scList);
-        JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
+        JsonHttpResponseHandler sc = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Gson gson = new Gson();
@@ -93,7 +93,7 @@ public class ShangChengFragment extends Fragment {
                 gridView.setAdapter(scAdapter);
             }
         };
-        GetHttpData(kc);
+        GetHttpData(sc);
 //        gridView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
 //            @Override
 //            public void onRefresh() {

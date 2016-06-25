@@ -7,33 +7,33 @@ public class ShangChengBean {
     public ShangChengBean() {
     }
 
-    private String Spid;
-    private String SpName;
+    private String id;
+    private String mingcheng;
     private String SpJifen;
     private String Spimg;
 
     public String getId() {
-        return Spid;
+        return id;
     }
 
     public void setId(String id) {
-        this.Spid = id;
+        this.id = id;
     }
 
-    public String getSpName() {
-        return SpName;
+    public String getMingcheng() {
+        return mingcheng;
     }
 
-    public void setSpName(String mingcheng) {
-        this.SpName = mingcheng;
+    public void setMingcheng(String mingcheng) {
+        this.mingcheng = mingcheng;
     }
 
     public String getSpimg() {
         return Spimg;
     }
 
-    public void setSpimg(String imgxiao) {
-        this.Spimg = imgxiao;
+    public void setSpimg(String spimg) {
+        this.Spimg = spimg;
     }
 
     public String getSpJifen() {
