@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rbOne, rbTwo, rbThree, rbFour;
     private int num = 4;
     private UpdateAppManager updateManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,14 +32,15 @@ public class MainActivity extends AppCompatActivity {
         updateManager = new UpdateAppManager(this);
         updateManager.checkUpdateInfo();
 
-        mFragments = new Fragment[3];
+        mFragments = new Fragment[4];
         fragmentManager = getSupportFragmentManager();
         mFragments[0] = fragmentManager.findFragmentById(R.id.fragement_one);
         mFragments[1] = fragmentManager.findFragmentById(R.id.fragement_two);
         mFragments[2] = fragmentManager.findFragmentById(R.id.fragement_three);
+        mFragments[3] = fragmentManager.findFragmentById(R.id.fragement_four);
 
         fragmentTransaction = fragmentManager.beginTransaction()
-                .hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2]);
+                .hide(mFragments[0]).hide(mFragments[1]).hide(mFragments[2]).hide(mFragments[3]);
         fragmentTransaction.show(mFragments[0]).commit();
         setFragmentIndicator();
 
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         rbOne = (RadioButton) findViewById(R.id.rbOne);
         rbTwo = (RadioButton) findViewById(R.id.rbTwo);
         rbThree = (RadioButton) findViewById(R.id.rbThree);
+        rbFour = (RadioButton) findViewById(R.id.rbFour);
 
         for (int i = 0; i < bottomRg.getChildCount(); i++) {
             RadioButton rbtn = (RadioButton) bottomRg.getChildAt(i);
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 fragmentTransaction = fragmentManager.beginTransaction()
                         .hide(mFragments[0]).hide(mFragments[1])
-                        .hide(mFragments[2]);
+                        .hide(mFragments[2]).hide(mFragments[3]);
                 switch (checkedId) {
                     case R.id.rbOne:
                         fragmentTransaction.show(mFragments[0]).commit();
@@ -86,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.rbThree:
                         fragmentTransaction.show(mFragments[2]).commit();
+                        break;
+
+                    case R.id.rbFour:
+                        fragmentTransaction.show(mFragments[3]).commit();
                         break;
 
                     default:

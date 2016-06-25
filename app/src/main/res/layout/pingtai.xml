@@ -2,13 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:divider="@drawable/bor_bot"
+    android:showDividers="middle"
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="#f33"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <TextView
             android:id="@+id/txtTitle"
@@ -22,16 +27,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dongfang"
+        android:id="@+id/lay_dongfang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:background="@drawable/shuibowen_click"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/shuibowen_click"
-        >
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="70dp"
@@ -70,32 +73,33 @@
                 android:text="在线订餐 餐到付款 优先配送"
                 android:textColor="#999999" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:background="#f33"
-                android:textColor="@color/white"
                 android:padding="10dp"
                 android:text="点击进入"
-                android:layout_gravity="right"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dafu"
+        android:id="@+id/lay_dafu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:background="@drawable/shuibowen_click"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/shuibowen_click">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="70dp"
@@ -127,32 +131,33 @@
                 android:text="网上外卖 在线订餐 货到付款"
                 android:textColor="#999999" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:background="#f33"
-                android:textColor="@color/white"
                 android:padding="10dp"
                 android:text="点击进入"
-                android:layout_gravity="right"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sjxnb"
+        android:id="@+id/lay_sjxnb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:background="@drawable/shuibowen_click"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/shuibowen_click">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="70dp"
@@ -184,32 +189,34 @@
                 android:text="网上商城 在线选品 货到付款"
                 android:textColor="#999999" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:background="#f33"
-                android:textColor="@color/white"
                 android:padding="10dp"
                 android:text="点击进入"
-                android:layout_gravity="right"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/zghj"
+        android:id="@+id/lay_zghj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:background="@drawable/shuibowen_click"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/shuibowen_click">
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
 
         <ImageView
             android:layout_width="70dp"
@@ -241,22 +248,23 @@
                 android:text="活动推介 新品展示"
                 android:textColor="#999999" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
                 android:background="#f33"
-                android:textColor="@color/white"
                 android:padding="10dp"
                 android:text="点击进入"
-                android:layout_gravity="right"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>

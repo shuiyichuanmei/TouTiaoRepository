@@ -13,7 +13,6 @@
         android:layout_weight="1"
         android:divider="@color/gray_line"
         android:dividerHeight="1dp"
-
         android:scrollbars="vertical"></com.shuiyi.app.toutiao.view.CustomListView>
 
 </LinearLayout>
