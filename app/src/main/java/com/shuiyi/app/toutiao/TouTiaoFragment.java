@@ -63,7 +63,7 @@ public class TouTiaoFragment extends Fragment {
         RequestParams rp = new RequestParams();
         rp.add("page", String.valueOf(pageIndex));
         //ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
-        ahu.get("http://192.168.31.109:88/Server/NewsHandler.ashx", rp, jhrh);
+        ahu.get("http://toutiao.ishowyou.cc/Server/NewsHandler.ashx", rp, jhrh);
     }
 
 

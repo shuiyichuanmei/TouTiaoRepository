@@ -81,7 +81,7 @@ public class DengluActivity extends AppCompatActivity {
                 rp.add("ft", "sms");
                 rp.add("tel", tel);
                 rp.add("yzm", curyzm);//192.168.1.99:885
-                ahu.get("http://192.168.31.109:88/Server/UserHandler.ashx", rp, new JsonHttpResponseHandler() {
+                ahu.get("http://toutiao.ishowyou.cc/Server/UserHandler.ashx", rp, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         if (statusCode != 200) {
@@ -108,7 +108,7 @@ public class DengluActivity extends AppCompatActivity {
                     RequestParams rp = new RequestParams();
                     rp.add("ft", "login");
                     rp.add("tel", txttel);
-                    ahu.get("http://192.168.31.109:88/Server/UserHandler.ashx", rp, new JsonHttpResponseHandler() {
+                    ahu.get("http://toutiao.ishowyou.cc/Server/UserHandler.ashx", rp, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             if (statusCode != 200) {

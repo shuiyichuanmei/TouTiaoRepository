@@ -59,7 +59,7 @@ public class ShangChengFragment extends Fragment {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();
         rp.add("ft", "get");
-        ahu.get("http://192.168.31.109:88/Server/JiFenShangPinHandler.ashx", rp,
+        ahu.get("http://toutiao.ishowyou.cc/Server/JiFenShangPinHandler.ashx", rp,
                 new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

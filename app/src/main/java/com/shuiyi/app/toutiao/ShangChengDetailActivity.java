@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
 @SuppressLint("JavascriptInterface")
-public class TouTiaoDetailActivity extends AppCompatActivity {
+public class ShangChengDetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private String news_url;
     private int jifen;
@@ -72,7 +72,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         Intent intent1 = getIntent();
         tid = intent1.getStringExtra("id");
         news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + tid;
-        tel = Common.getSharedPreferences(TouTiaoDetailActivity.this, "tel");
+        tel = Common.getSharedPreferences(ShangChengDetailActivity.this, "tel");
 
         initView();
         initWebView();
@@ -92,12 +92,12 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         btnGetJiFen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!Common.isDenglu(TouTiaoDetailActivity.this)) {
-                    Intent intent = new Intent(TouTiaoDetailActivity.this, DengluActivity.class);
+                if (!Common.isDenglu(ShangChengDetailActivity.this)) {
+                    Intent intent = new Intent(ShangChengDetailActivity.this, DengluActivity.class);
                     startActivity(intent);
                     return;
                 }
-                tel = Common.getSharedPreferences(TouTiaoDetailActivity.this, "tel");
+                tel = Common.getSharedPreferences(ShangChengDetailActivity.this, "tel");
                 AsyncHttpUtil ahu = new AsyncHttpUtil();
                 RequestParams rp = new RequestParams();
                 rp.add("ft", "add");
@@ -108,7 +108,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         if (statusCode != 200) {
-                            Toast.makeText(TouTiaoDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ShangChengDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
                             return;
                         }
                         try {
@@ -118,7 +118,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                                 btnGetJiFen.setEnabled(false);
                                 btnGetJiFen.setText("已领取");
                             } else {
-                                Toast.makeText(TouTiaoDetailActivity.this, msg, Toast.LENGTH_LONG).show();
+                                Toast.makeText(ShangChengDetailActivity.this, msg, Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception ex) {
                         }
@@ -231,7 +231,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     if (statusCode != 200) {
-                        Toast.makeText(TouTiaoDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ShangChengDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
                         return;
                     }
                     try {

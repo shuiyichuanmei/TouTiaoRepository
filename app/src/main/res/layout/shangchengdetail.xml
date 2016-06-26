@@ -1,64 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:divider="@drawable/bor_bot"
-    android:showDividers="middle"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/tool_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="#f33"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="积分数量" />
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_click_bg"
+                android:src="@android:drawable/ic_menu_revert" />
 
             <TextView
+                android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="剩余:50" />
+                android:gravity="center"
+                android:text=""
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_click_bg"
+                android:src="@android:drawable/ic_menu_revert" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_click_bg"
+                android:src="@android:drawable/ic_menu_revert" />
+
         </LinearLayout>
 
-        <TextView
+        <com.shuiyi.app.toutiao.view.MyWebView
+            android:id="@+id/wb_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="商品名称商品名称商品名称商品名称" />
+            android:layout_height="match_parent"
+            android:layout_above="@id/tool_bar_layout"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/ss_htmlprogessbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="8.0dip"
+            android:layout_above="@id/tool_bar_layout"
+            android:layout_marginBottom="2.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:max="100"
+            android:visibility="gone" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="兑换须知"
-
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="须知内容"
-        />
-
     <Button
+        android:id="@+id/btnGetJiFen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#f33"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:textColor="#ffffff"
-        android:text="我要兑换" />
-
-</LinearLayout>
+        android:layout_height="50dp"
+        android:background="@color/orangeFAB615"
+        android:layout_alignParentBottom="true"
+        android:enabled="false"
+        android:visibility="invisible"
+        android:text="" />
+</RelativeLayout>
