@@ -65,12 +65,12 @@
                 <RadioButton
                     android:id="@+id/xinwen_rb2"
                     style="@style/radio_style"
-                    android:text="娱乐" />
+                    android:text="便民" />
 
                 <RadioButton
                     android:id="@+id/xinwen_rb3"
                     style="@style/radio_style"
-                    android:text="体育" />
+                    android:text="优惠" />
             </RadioGroup>
 
             <TextView

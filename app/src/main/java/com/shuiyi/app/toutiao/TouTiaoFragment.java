@@ -31,11 +31,15 @@ public class TouTiaoFragment extends Fragment {
     private TouTiaoAdapter ttAdapter = null;
     private ArrayList<TouTiaoBean> ttList = null;
     private int pageIndex = 1;
+    private String typeid = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.toutiao, container, false);
+        View view = inflater.inflate(R.layout.toutiao, container, false);
+
+        typeid = getArguments().getString("typeid");
+
         findView(view);
         return view;
     }
@@ -58,10 +62,12 @@ public class TouTiaoFragment extends Fragment {
 //            addData(tt);
         }
     }
+
     private void addData(JsonHttpResponseHandler jhrh) {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();
         rp.add("page", String.valueOf(pageIndex));
+        rp.add("typeid", typeid);
         //ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
         ahu.get("http://toutiao.ishowyou.cc/Server/NewsHandler.ashx", rp, jhrh);
     }
@@ -76,7 +82,8 @@ public class TouTiaoFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Gson gson = new Gson();
-                Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
+                Type type = new TypeToken<ArrayList<TouTiaoBean>>() {
+                }.getType();
                 ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                 ttList.addAll(itemList);
                 listView.setAdapter(ttAdapter);
@@ -94,7 +101,8 @@ public class TouTiaoFragment extends Fragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new Gson();
-                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
+                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {
+                        }.getType();
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onRefreshComplete();
@@ -113,7 +121,8 @@ public class TouTiaoFragment extends Fragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new Gson();
-                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {}.getType();
+                        Type type = new TypeToken<ArrayList<TouTiaoBean>>() {
+                        }.getType();
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onLoadMoreComplete();
