@@ -1,6 +1,7 @@
 package com.shuiyi.app.toutiao;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +39,7 @@ public class ShangChengFragment extends Fragment {
     private ShangChengAdapter scAdapter = null;
     private ArrayList<ShangChengBean> scList = null;
     private int pageIndex = 1;
+    private TextView jifenUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,9 +55,14 @@ public class ShangChengFragment extends Fragment {
     }
 
     private void findView() {
+        jifenUser=(TextView) getActivity().findViewById(R.id.jifen_user);
         gridView = (GridView) getActivity().findViewById(R.id.gridview);
         scList = new ArrayList<ShangChengBean>();
         scAdapter = new ShangChengAdapter(getActivity(), scList);
+
+        Drawable[] drawable=jifenUser.getCompoundDrawables();
+        drawable[0].setBounds(0,0,50,50);
+        jifenUser.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
 
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();

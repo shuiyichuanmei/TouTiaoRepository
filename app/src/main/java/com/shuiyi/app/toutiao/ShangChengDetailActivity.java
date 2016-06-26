@@ -71,7 +71,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
 
         Intent intent1 = getIntent();
         tid = intent1.getStringExtra("id");
-        news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + tid;
+        news_url = "http://toutiao.ishowyou.cc/apps_detail.aspx?id=" + tid;
         tel = Common.getSharedPreferences(ShangChengDetailActivity.this, "tel");
 
         initView();
