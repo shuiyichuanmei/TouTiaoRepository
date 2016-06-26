@@ -9,7 +9,7 @@ public class ShangChengBean {
 
     private String id;
     private String mingcheng;
-    private String SpJifen;
+    private double SpJifen;
     private String Spimg;
 
     public String getId() {
@@ -36,13 +36,11 @@ public class ShangChengBean {
         this.Spimg = spimg;
     }
 
-    public String getSpJifen() {
+    public double getSpJifen() {
         return SpJifen;
     }
 
-    public void setSpJifen(String spJifen) {
+    public void setSpJifen(double spJifen) {
         this.SpJifen = spJifen;
     }
-
-
 }
