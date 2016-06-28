@@ -57,13 +57,14 @@ public class ShangChengFragment extends Fragment {
     }
 
     private void findView() {
-        jifenUser=(TextView) getActivity().findViewById(R.id.jifen_user);
+
+        jifenUser = (TextView) getActivity().findViewById(R.id.jifen_user);
         gridView = (GridView) getActivity().findViewById(R.id.gridview);
         scList = new ArrayList<ShangChengBean>();
         scAdapter = new ShangChengAdapter(getActivity(), scList);
 
-        Drawable[] drawable=jifenUser.getCompoundDrawables();
-        drawable[0].setBounds(0,0,50,50);
+        Drawable[] drawable = jifenUser.getCompoundDrawables();
+        drawable[0].setBounds(0, 0, 50, 50);
         jifenUser.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
 
 
