@@ -41,6 +41,7 @@ public class ShangChengFragment extends Fragment {
     private ArrayList<ShangChengBean> scList = null;
     private int pageIndex = 1;
     private TextView jifenUser;
+    private LinearLayout myOrder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +58,7 @@ public class ShangChengFragment extends Fragment {
     }
 
     private void findView() {
-
+        myOrder = (LinearLayout) getActivity().findViewById(R.id.myorder);
         jifenUser = (TextView) getActivity().findViewById(R.id.jifen_user);
         gridView = (GridView) getActivity().findViewById(R.id.gridview);
         scList = new ArrayList<ShangChengBean>();
@@ -91,5 +92,15 @@ public class ShangChengFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        myOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), JiFenOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 }
