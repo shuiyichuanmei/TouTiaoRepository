@@ -74,7 +74,6 @@
         android:layout_height="50dp"
         android:background="@color/orangeFAB615"
         android:layout_alignParentBottom="true"
-        android:enabled="false"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:text="我要兑换" />
 </RelativeLayout>

@@ -49,7 +49,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.toutiaodetail);
+        setContentView(R.layout.shangchengdetail);
         //setNeedBackGesture(true);//设置需要手势监听
 
         Intent intent1 = getIntent();
@@ -201,6 +201,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
             //addImageClickListner();
             progressBar.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
+            btnGetJiFen.setVisibility(View.VISIBLE);
         }
 
         @Override

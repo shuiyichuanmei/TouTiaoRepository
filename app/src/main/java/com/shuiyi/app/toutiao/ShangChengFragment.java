@@ -82,5 +82,14 @@ public class ShangChengFragment extends Fragment {
                         gridView.setAdapter(scAdapter);
                     }
                 });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ShangChengBean item = (ShangChengBean) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), ShangChengDetailActivity.class);
+                intent.putExtra("id", item.getId());
+                startActivity(intent);
+            }
+        });
     }
 }
