@@ -2,13 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="#ffffff"
-    android:orientation="vertical">
+
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/btn_click_bg"
+
+        android:padding="5dp">
 
     <ImageView
         android:id="@+id/sp_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         android:src="@drawable/sc_top_img" />
 
@@ -23,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="积分300" />
-
+    </LinearLayout>
 
 </LinearLayout>
+
