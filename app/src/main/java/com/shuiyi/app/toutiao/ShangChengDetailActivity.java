@@ -40,28 +40,11 @@ import java.util.ConcurrentModificationException;
 public class ShangChengDetailActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private String news_url;
-    private int jifen;
-    private String jiFenId;
-    private String tid;
+    private String spid;
     private String tel;
     private ImageButton backButton;
     private Button btnGetJiFen;
     MyWebView webView;
-    int daojishi = 3;
-    private Handler handler = new Handler();
-    private Runnable myRunnable = new Runnable() {
-        public void run() {
-            if (daojishi <= 0) {
-                daojishi = 3;
-                btnGetJiFen.setEnabled(true);
-                btnGetJiFen.setText("领取" + jifen + "积分");
-            } else {
-                btnGetJiFen.setText("领取" + jifen + "积分(" + daojishi + ")");
-                handler.postDelayed(this, 1000);
-            }
-            daojishi--;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +53,8 @@ public class ShangChengDetailActivity extends AppCompatActivity {
         //setNeedBackGesture(true);//设置需要手势监听
 
         Intent intent1 = getIntent();
-        tid = intent1.getStringExtra("id");
-        news_url = "http://toutiao.ishowyou.cc/apps_detail.aspx?id=" + tid;
+        spid = intent1.getStringExtra("id");
+        news_url = "http://toutiao.ishowyou.cc/jifen/apps_detail.aspx?id=" + spid;
         tel = Common.getSharedPreferences(ShangChengDetailActivity.this, "tel");
 
         initView();
@@ -97,13 +80,11 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                     startActivity(intent);
                     return;
                 }
-                tel = Common.getSharedPreferences(ShangChengDetailActivity.this, "tel");
                 AsyncHttpUtil ahu = new AsyncHttpUtil();
                 RequestParams rp = new RequestParams();
-                rp.add("ft", "add");
+                rp.add("ft", "duihuan");
                 rp.add("tel", tel);
-                rp.add("type", "头条广告");
-                rp.add("jfid", jiFenId);
+                rp.add("spid", spid);
                 ahu.get("http://toutiao.ishowyou.cc/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -115,8 +96,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                             String success = response.getString("success");
                             String msg = response.getString("msg");
                             if (success.equals("true")) {
-                                btnGetJiFen.setEnabled(false);
-                                btnGetJiFen.setText("已领取");
+                                Toast.makeText(ShangChengDetailActivity.this, "兑换成功,请尽快领取.", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(ShangChengDetailActivity.this, msg, Toast.LENGTH_LONG).show();
                             }
@@ -221,35 +201,6 @@ public class ShangChengDetailActivity extends AppCompatActivity {
             //addImageClickListner();
             progressBar.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
-            AsyncHttpUtil ahu = new AsyncHttpUtil();
-            RequestParams rp = new RequestParams();
-            rp.add("ft", "get");
-            rp.add("tid", tid);
-            rp.add("type", "头条广告");
-            rp.add("tel", tel);
-            ahu.get("http://toutiao.ishowyou.cc/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    if (statusCode != 200) {
-                        Toast.makeText(ShangChengDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    try {
-                        String success = response.getString("success");
-                        if (success.equals("true")) {
-                            jifen = response.getInt("jifennum");
-                            jiFenId = response.getString("jifenid");
-                            btnGetJiFen.setVisibility(View.VISIBLE);
-                            handler.postDelayed(myRunnable, 0);
-                        } else if (success.equals("chongfu")) {
-                            btnGetJiFen.setVisibility(View.VISIBLE);
-                            btnGetJiFen.setEnabled(false);
-                            btnGetJiFen.setText("已领取");
-                        }
-                    } catch (Exception ex) {
-                    }
-                }
-            });
         }
 
         @Override

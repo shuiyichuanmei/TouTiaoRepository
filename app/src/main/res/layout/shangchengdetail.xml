@@ -76,5 +76,5 @@
         android:layout_alignParentBottom="true"
         android:enabled="false"
         android:visibility="invisible"
-        android:text="" />
+        android:text="我要兑换" />
 </RelativeLayout>
