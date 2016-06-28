@@ -66,6 +66,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustNothing"></activity>
+        <activity
+            android:name=".JiFenOrderActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustNothing"></activity>
     </application>
 
 </manifest>
