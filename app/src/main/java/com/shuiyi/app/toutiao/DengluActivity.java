@@ -1,6 +1,7 @@
 package com.shuiyi.app.toutiao;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -116,7 +117,11 @@ public class DengluActivity extends AppCompatActivity {
                             } else {
                                 Common.setSharedPreferences(DengluActivity.this, "tel", curtel);
                                 Toast.makeText(DengluActivity.this, "登录成功", Toast.LENGTH_LONG).show();
-                                onBackPressed();
+
+                                Intent intent=getIntent();
+                                DengluActivity.this.setResult(4,intent);
+                                DengluActivity.this.finish();
+                                //onBackPressed();
                             }
                         }
 

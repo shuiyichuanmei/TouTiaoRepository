@@ -15,8 +15,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -24,11 +26,13 @@ import com.shuiyi.app.toutiao.adapter.KuaiCanAdapter;
 import com.shuiyi.app.toutiao.adapter.ShangChengAdapter;
 import com.shuiyi.app.toutiao.bean.KuaiCanBean;
 import com.shuiyi.app.toutiao.bean.ShangChengBean;
+import com.shuiyi.app.toutiao.common.Common;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
 import com.shuiyi.app.toutiao.view.CustomListView;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -41,6 +45,8 @@ public class ShangChengFragment extends Fragment {
     private ArrayList<ShangChengBean> scList = null;
     private int pageIndex = 1;
     private TextView jifenUser;
+    private String tel;
+    private LinearLayout lotJifen;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,12 +62,62 @@ public class ShangChengFragment extends Fragment {
 
     }
 
-    private void findView() {
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {// 不在最前端界面显示
 
+            InitJiFen();
+        }
+    }
+
+    private void InitJiFen() {
+        tel = Common.getSharedPreferences(getActivity(), "tel");
+        if (tel != null && !tel.equals("")) {
+            AsyncHttpUtil ahujifen = new AsyncHttpUtil();
+            RequestParams rpjifen = new RequestParams();
+            rpjifen.add("ft", "getjifen");
+            rpjifen.add("tel", tel);
+            ahujifen.get("http://toutiao.ishowyou.cc/Server/UserHandler.ashx", rpjifen,
+                    new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            try {
+                                String success = response.getString("success");
+                                String msg = response.getString("msg");
+                                String jifen = response.getString("jifen");
+                                if (success.equals("true")) {
+                                    jifenUser.setText(jifen);
+                                } else {
+                                    Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+                                }
+                            } catch (Exception ex) {
+                            }
+
+                        }
+                    });
+        } else {
+            jifenUser.setText("立即登录查看");
+        }
+    }
+
+    private void findView() {
         jifenUser = (TextView) getActivity().findViewById(R.id.jifen_user);
         gridView = (GridView) getActivity().findViewById(R.id.gridview);
         scList = new ArrayList<ShangChengBean>();
         scAdapter = new ShangChengAdapter(getActivity(), scList);
+        lotJifen=(LinearLayout) getActivity().findViewById(R.id.lotJifen);
+        lotJifen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!Common.isDenglu(getActivity())) {
+                    Intent intent = new Intent(getActivity(), DengluActivity.class);
+                    startActivityForResult(intent,4);
+                    return;
+                }
+            }
+        });
+        InitJiFen();
 
         Drawable[] drawable = jifenUser.getCompoundDrawables();
         drawable[0].setBounds(0, 0, 50, 50);
