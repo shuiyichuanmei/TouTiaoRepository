@@ -1,6 +1,7 @@
 package com.shuiyi.app.toutiao;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -52,6 +53,7 @@ public class ShangChengFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         findView();
+
     }
 
     private void findView() {
@@ -63,6 +65,7 @@ public class ShangChengFragment extends Fragment {
         Drawable[] drawable=jifenUser.getCompoundDrawables();
         drawable[0].setBounds(0,0,50,50);
         jifenUser.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
+
 
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();

@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/sp_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:scaleType="centerCrop"
+        android:src="@drawable/sc_top_img" />
 
-        <ImageView
-            android:id="@+id/sp_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+    <TextView
+        android:id="@+id/sp_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="手工香皂" />
 
-            android:src="@drawable/sc_top_img" />
+    <TextView
+        android:id="@+id/sp_jifen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="积分300" />
 
 
-        <TextView
-            android:id="@+id/sp_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手工香皂" />
-
-        <TextView
-            android:id="@+id/sp_jifen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="积分300" />
-    </LinearLayout>
 </LinearLayout>
