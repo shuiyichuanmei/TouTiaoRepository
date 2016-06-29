@@ -1,6 +1,7 @@
 package com.shuiyi.app.toutiao.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -36,6 +37,10 @@ public class ShangChengAdapter extends MyBaseAdapter<ShangChengBean> {
         ImageView spimg = (ImageView) ViewHolder.get(convertView, R.id.sp_img);
         TextView spname = (TextView) ViewHolder.get(convertView, R.id.sp_name);
         TextView spjifen = (TextView) ViewHolder.get(convertView, R.id.sp_jifen);
+
+        Drawable[] drawable = spjifen.getCompoundDrawables();
+        drawable[0].setBounds(0, 0, 30, 30);
+        spjifen.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
 
         spname.setText(beans.get(position).getMingcheng());
         spjifen.setText(String.valueOf(beans.get(position).getSpJifen()));

@@ -1,6 +1,8 @@
 package com.shuiyi.app.toutiao.adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,13 +37,23 @@ public class JiFenOrderAdapter extends MyBaseAdapter<JiFenOrderBean> {
         }
         ImageView imgurl = (ImageView) ViewHolder.get(convertView, R.id.imageurl);
         TextView mingcheng = (TextView) ViewHolder.get(convertView, R.id.mingcheng);
-        TextView status = (TextView) ViewHolder.get(convertView, R.id.status);
+        TextView txtstatus = (TextView) ViewHolder.get(convertView, R.id.status);
         TextView dhText = (TextView) ViewHolder.get(convertView, R.id.num_text);
+        TextView tmText = (TextView) ViewHolder.get(convertView, R.id.timedate);
 
+        String status = beans.get(position).getStatus();
+        if (status != null && status.equals("未兑换")) {
+            txtstatus.setBackgroundResource(R.color.DCDCDC);
+            txtstatus.setTextColor(Color.parseColor("#999999"));
+        } else {
+            txtstatus.setBackgroundResource(R.color.white);
+            txtstatus.setTextColor(Color.parseColor("#333333"));
+        }
 
+        tmText.setText(beans.get(position).getCreatedate());
         mingcheng.setText(beans.get(position).getMingcheng());
-        dhText.setText(beans.get(position).getId());
-        status.setText(beans.get(position).getStatus());
+        dhText.setText(beans.get(position).getStatus());
+        txtstatus.setText(beans.get(position).getStatus());
         ImageLoader.getInstance().displayImage(beans.get(position).getSpimg(), imgurl, options);
         return convertView;
     }

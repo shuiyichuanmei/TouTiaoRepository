@@ -134,7 +134,7 @@ public class ShangChengFragment extends Fragment {
             }
         });
         Drawable[] drawable = jifenUser.getCompoundDrawables();
-        drawable[0].setBounds(0, 0, 50, 50);
+        drawable[0].setBounds(0, 0, 30, 30);
         jifenUser.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
 
 

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,26 +40,28 @@
                 android:src="@drawable/sc_top_img" />
 
             <LinearLayout
+                android:id="@+id/lotJifen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/lotJifen">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="5dp"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="5dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/sc_jifen_icon" />
 
@@ -73,7 +75,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingTop="5dp"
                                 android:text="我的礼券"
                                 android:textColor="#333333" />
 
@@ -83,7 +84,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:drawableLeft="@drawable/icon_jifen_num"
-                                android:text="立即登录查看"
                                 android:textColor="#333333" />
 
                         </LinearLayout>
@@ -96,15 +96,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:background="@drawable/btn_click_bg">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="5dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/sc_liwu_icon" />
 
@@ -134,8 +138,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bor_bot">
+                android:background="@drawable/bor_img"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,11 +167,10 @@
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="2"
-                android:horizontalSpacing="1dp"
-                android:verticalSpacing="1dp"
                 android:background="#dcdcdc"
-                ></com.shuiyi.app.toutiao.view.MyGridView>
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:verticalSpacing="1dp"></com.shuiyi.app.toutiao.view.MyGridView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
