@@ -117,6 +117,10 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             if (success.equals("true")) {
                                 btnGetJiFen.setEnabled(false);
                                 btnGetJiFen.setText("已领取");
+
+                                Intent intent = new Intent();
+                                intent.setAction("action.refreshFriend");
+                                sendBroadcast(intent);
                             } else {
                                 Toast.makeText(TouTiaoDetailActivity.this, msg, Toast.LENGTH_LONG).show();
                             }
