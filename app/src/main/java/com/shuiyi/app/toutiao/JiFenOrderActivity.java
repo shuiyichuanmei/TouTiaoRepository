@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class JiFenOrderActivity extends AppCompatActivity {
     private ArrayList<JiFenOrderBean> jifenList = null;
     private int pageIndex = 1;
     private String tel;
+    private LinearLayout line;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class JiFenOrderActivity extends AppCompatActivity {
     }
 
     private void findView() {
+        line = (LinearLayout) findViewById(R.id.line);
         listView = (CustomListView) findViewById(R.id.list_item);
         jifenList = new ArrayList<JiFenOrderBean>();
         listAdapter = new JiFenOrderAdapter(JiFenOrderActivity.this, jifenList);
@@ -64,11 +67,18 @@ public class JiFenOrderActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 ArrayList<JiFenOrderBean> itemList = gson.fromJson(response.toString(), new TypeToken<ArrayList<JiFenOrderBean>>() {
                 }.getType());
-                if(itemList.size()<10){
-                    listView.setCanLoadMore(false);
+                if (itemList.size() != 0) {
+                    if (itemList.size() < 10) {
+                        listView.setCanLoadMore(false);
+                    }
+                    jifenList.addAll(itemList);
+                    listView.setAdapter(listAdapter);
+                } else {
+                    line.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.GONE);
                 }
-                jifenList.addAll(itemList);
-                listView.setAdapter(listAdapter);
+
+
             }
         };
         GetHttpData(kc);
@@ -83,7 +93,7 @@ public class JiFenOrderActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         ArrayList<JiFenOrderBean> itemList = gson.fromJson(response.toString(), new TypeToken<ArrayList<JiFenOrderBean>>() {
                         }.getType());
-                        if(itemList.size()<10){
+                        if (itemList.size() < 10) {
                             listView.setCanLoadMore(false);
                         }
                         jifenList.addAll(itemList);
@@ -103,7 +113,7 @@ public class JiFenOrderActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         ArrayList<JiFenOrderBean> itemList = gson.fromJson(response.toString(), new TypeToken<ArrayList<JiFenOrderBean>>() {
                         }.getType());
-                        if(itemList.size()<10){
+                        if (itemList.size() < 10) {
                             listView.setCanLoadMore(false);
                         }
                         jifenList.addAll(itemList);
