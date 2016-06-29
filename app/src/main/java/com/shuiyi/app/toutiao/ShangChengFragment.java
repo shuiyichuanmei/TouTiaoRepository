@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 
@@ -50,6 +52,7 @@ public class ShangChengFragment extends Fragment {
     private String tel;
     private LinearLayout lotJifen;
     private LinearLayout myOrder;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,6 +112,11 @@ public class ShangChengFragment extends Fragment {
                                 String jifen = response.getString("jifen");
                                 if (success.equals("true")) {
                                     jifenUser.setText(jifen);
+                                    Drawable img_on, img_off;
+                                    Resources res = getResources();
+                                    img_off = res.getDrawable(R.drawable.icon_jifen_num);
+                                    img_off.setBounds(0, 0,30, 30);
+                                    jifenUser.setCompoundDrawables(img_off, null, null, null);
                                 } else {
                                     Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
                                 }
@@ -118,6 +126,7 @@ public class ShangChengFragment extends Fragment {
                     });
         } else {
             jifenUser.setText("立即登录查看");
+            jifenUser.setCompoundDrawables(null, null, null, null);
         }
     }
 
@@ -149,9 +158,6 @@ public class ShangChengFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        Drawable[] drawable = jifenUser.getCompoundDrawables();
-        drawable[0].setBounds(0, 0, 30, 30);
-        jifenUser.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
 
 
         AsyncHttpUtil ahu = new AsyncHttpUtil();

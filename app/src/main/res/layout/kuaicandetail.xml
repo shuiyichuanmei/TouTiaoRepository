@@ -15,7 +15,9 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:id="@+id/imageButton"
-            android:src="@android:drawable/ic_menu_revert"
+            android:scaleType="centerCrop"
+            android:padding="10dp"
+            android:src="@drawable/icon_backbtn_click"
             android:background="@drawable/btn_click_bg"/>
 
         <TextView

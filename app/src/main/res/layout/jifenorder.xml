@@ -14,8 +14,10 @@
             android:id="@+id/imageButton"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:scaleType="centerCrop"
+            android:padding="10dp"
             android:background="@drawable/btn_click_bg"
-            android:src="@android:drawable/ic_menu_revert" />
+            android:src="@drawable/icon_backbtn_click" />
 
         <TextView
             android:id="@+id/txtTitle"

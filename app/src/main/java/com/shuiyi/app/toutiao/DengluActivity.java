@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -30,6 +31,7 @@ public class DengluActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnSendYzm;
     private int daojishi = 5;
+    private ImageButton imageButton;
     private Handler handler = new Handler();
     private Runnable myRunnable = new Runnable() {
         public void run() {
@@ -66,6 +68,14 @@ public class DengluActivity extends AppCompatActivity {
         txtYzm = (EditText) this.findViewById(R.id.txtYzm);
         btnSendYzm = (Button) this.findViewById(R.id.btnSendYzm);
         btnLogin = (Button) this.findViewById(R.id.btnLogin);
+        imageButton =(ImageButton)this.findViewById(R.id.imageButton);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         btnSendYzm.setOnClickListener(new View.OnClickListener() {
             @Override
