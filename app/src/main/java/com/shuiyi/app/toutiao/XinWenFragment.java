@@ -56,9 +56,15 @@ public class XinWenFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (contentview == null) {
-            contentview = initview(inflater);
+            contentview = inflater.inflate(R.layout.xinwenfragment, null, false);
         }
         return contentview;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initview();
     }
 
     private FragmentManager fragmentManager;
@@ -90,12 +96,8 @@ public class XinWenFragment extends Fragment {
 
 
     //初始化控件
-    private View initview(LayoutInflater inflater) {
-        //System.out.println(getFragmentManager().getFragments().size()+"    ------------------------------------------");
-
-        View view = inflater.inflate(R.layout.xinwenfragment, null, false);
-
-
+    private void initview() {
+        View view = contentview;
         searchbtn = (ImageButton) view.findViewById(R.id.imageButton);
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +198,7 @@ public class XinWenFragment extends Fragment {
             }
         });
 
-        return view;
+
     }
 
 

@@ -1,7 +1,9 @@
 package com.shuiyi.app.toutiao;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -69,7 +71,22 @@ public class ShangChengFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         findView();
         InitJifen();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("action.refreshFriend");
+        getActivity().registerReceiver(mRefreshBroadcastReceiver, intentFilter);
     }
+
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("action.refreshFriend")) {
+                InitJifen();
+            }
+        }
+    };
 
     private void InitJifen() {
         if (Common.isDenglu(getActivity())) {
@@ -99,8 +116,7 @@ public class ShangChengFragment extends Fragment {
                             }
                         }
                     });
-        }else
-        {
+        } else {
             jifenUser.setText("立即登录查看");
         }
     }

@@ -97,6 +97,9 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                             String msg = response.getString("msg");
                             if (success.equals("true")) {
                                 Toast.makeText(ShangChengDetailActivity.this, "兑换成功,请尽快领取.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent();
+                                intent.setAction("action.refreshFriend");
+                                sendBroadcast(intent);
                             } else {
                                 Toast.makeText(ShangChengDetailActivity.this, msg, Toast.LENGTH_LONG).show();
                             }

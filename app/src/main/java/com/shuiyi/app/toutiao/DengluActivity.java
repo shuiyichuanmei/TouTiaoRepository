@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.shuiyi.app.toutiao.common.Common;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
+
 import org.apache.http.Header;
 import org.json.JSONObject;
 
@@ -89,6 +91,7 @@ public class DengluActivity extends AppCompatActivity {
                             Toast.makeText(DengluActivity.this, "验证码发送失败，请稍后重试。", Toast.LENGTH_LONG).show();
                         }
                     }
+
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(DengluActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
@@ -118,10 +121,13 @@ public class DengluActivity extends AppCompatActivity {
                                 Common.setSharedPreferences(DengluActivity.this, "tel", curtel);
                                 Toast.makeText(DengluActivity.this, "登录成功", Toast.LENGTH_LONG).show();
 
-                                Intent intent=getIntent();
-                                DengluActivity.this.setResult(4,intent);
-                                DengluActivity.this.finish();
-                                //onBackPressed();
+//                                Intent intent=getIntent();
+//                                DengluActivity.this.setResult(4,intent);
+//                                DengluActivity.this.finish();
+                                Intent intent = new Intent();
+                                intent.setAction("action.refreshFriend");
+                                sendBroadcast(intent);
+                                onBackPressed();
                             }
                         }
 
