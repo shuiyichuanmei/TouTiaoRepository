@@ -2,11 +2,13 @@ package com.shuiyi.app.toutiao;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,14 +25,19 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.shuiyi.app.toutiao.bean.ShangChengBean;
 import com.shuiyi.app.toutiao.common.Common;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
 import com.shuiyi.app.toutiao.view.MyWebView;
 import com.shuiyi.app.toutiao.view.ScrollInterface;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -43,7 +50,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
     private String spid;
     private String tel;
     private ImageButton backButton;
-    private Button btnGetJiFen;
+    private Button btnDuihuan;
     MyWebView webView;
 
     @Override
@@ -71,8 +78,8 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        btnGetJiFen = (Button) this.findViewById(R.id.btnGetJiFen);
-        btnGetJiFen.setOnClickListener(new View.OnClickListener() {
+        btnDuihuan = (Button) this.findViewById(R.id.btnDuihuan);
+        btnDuihuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!Common.isDenglu(ShangChengDetailActivity.this)) {
@@ -85,28 +92,41 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                 rp.add("ft", "duihuan");
                 rp.add("tel", tel);
                 rp.add("spid", spid);
-                ahu.get("http://toutiao.ishowyou.cc/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        if (statusCode != 200) {
-                            Toast.makeText(ShangChengDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        try {
-                            String success = response.getString("success");
-                            String msg = response.getString("msg");
-                            if (success.equals("true")) {
-                                Toast.makeText(ShangChengDetailActivity.this, "兑换成功,请尽快领取.", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent();
-                                intent.setAction("action.refreshFriend");
-                                sendBroadcast(intent);
-                            } else {
-                                Toast.makeText(ShangChengDetailActivity.this, msg, Toast.LENGTH_LONG).show();
+                ahu.get("http://toutiao.ishowyou.cc/Server/JiFenOrderHandler.ashx", rp,
+                        new TextHttpResponseHandler() {
+                            @Override
+                            public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
+                                Toast.makeText(ShangChengDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                             }
-                        } catch (Exception ex) {
+
+                            @Override
+                            public void onSuccess(int i, Header[] headers, String s) {
+                                if (s.equals("ok")) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(ShangChengDetailActivity.this);
+                                    builder.setMessage("兑换成功,请尽快领取。\n可在礼物查询中查看兑换记录。");
+                                    builder.setTitle("兑换信息");
+                                    builder.setIcon(R.drawable.sc_liwu_icon);
+                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    builder.create().show();
+                                    Intent intent = new Intent();
+                                    intent.setAction("action.refreshFriend");
+                                    sendBroadcast(intent);
+                                } else if (s.equals("shuliangbuzu")) {
+                                    Toast.makeText(ShangChengDetailActivity.this, "商品数量不足", Toast.LENGTH_LONG).show();
+                                    webView.reload();
+                                    btnDuihuan.setText("商品数量不足");
+                                    btnDuihuan.setEnabled(false);
+                                } else if (s.equals("jifenbuzu")) {
+                                    Toast.makeText(ShangChengDetailActivity.this, "您的积分不足", Toast.LENGTH_LONG).show();
+                                }
+                            }
                         }
-                    }
-                });
+                );
             }
         });
     }
@@ -123,18 +143,11 @@ public class ShangChengDetailActivity extends AppCompatActivity {
             settings.setSupportZoom(false);// 用于设置webview放大
             settings.setBuiltInZoomControls(false);
             webView.setBackgroundResource(R.color.transparent);
-            //webView.addJavascriptInterface(new JavascriptInterface(getApplicationContext()),"imagelistner");// 添加js交互接口类，并起别名 imagelistner
             webView.setWebChromeClient(new MyWebChromeClient());//设置加载进度
             webView.setWebViewClient(new MyWebViewClient());
             new MyAsnycTask().execute(news_url);
         }
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//    }
 
     private class MyAsnycTask extends AsyncTask<String, String, String> {
 
@@ -150,45 +163,6 @@ public class ShangChengDetailActivity extends AppCompatActivity {
         }
     }
 
-    // 注入js函数监听
-    private void addImageClickListner() {
-        // 这段js函数的功能就是，遍历所有的img几点，并添加onclick函数，在还是执行的时候调用本地接口传递url过去
-        webView.loadUrl("javascript:(function(){"
-                + "var objs = document.getElementsByTagName(\"img\");"
-                + "var imgurl=''; " + "for(var i=0;i<objs.length;i++)  " + "{"
-                + "imgurl+=objs[i].src+',';"
-                + "    objs[i].onclick=function()  " + "    {  "
-                + "        window.imagelistner.openImage(imgurl);  "
-                + "    }  " + "}" + "})()");
-    }
-
-    // js通信接口
-    public class JavascriptInterface {
-
-
-        private Context context;
-
-        public JavascriptInterface(Context context) {
-            this.context = context;
-        }
-
-        public void openImage(String img) {
-            System.out.println(img);
-            //
-            String[] imgs = img.split(",");
-            ArrayList<String> imgsUrl = new ArrayList<String>();
-            for (String s : imgs) {
-                imgsUrl.add(s);
-                //Log.i("图片的URL>>>>>>>>>>>>>>>>>>>>>>>", s);
-            }
-            Intent intent = new Intent();
-            intent.putStringArrayListExtra("infos", imgsUrl);
-            //intent.setClass(context, ImageShowActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
-    }
-
     // 监听
     private class MyWebViewClient extends WebViewClient {
         @Override
@@ -200,11 +174,32 @@ public class ShangChengDetailActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             view.getSettings().setJavaScriptEnabled(true);
             super.onPageFinished(view, url);
-            // html加载完成之后，添加监听图片的点击js函数
-            //addImageClickListner();
             progressBar.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
-            btnGetJiFen.setVisibility(View.VISIBLE);
+
+            AsyncHttpUtil ahu = new AsyncHttpUtil();
+            RequestParams rp = new RequestParams();
+            rp.add("ft", "get");
+            rp.add("id", spid);
+            ahu.get("http://toutiao.ishowyou.cc/Server/JiFenShangPinHandler.ashx", rp,
+                    new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Gson gson = new Gson();
+                            ShangChengBean item = gson.fromJson(response.toString(), new TypeToken<ShangChengBean>() {
+                            }.getType());
+                            btnDuihuan.setVisibility(View.VISIBLE);
+                            if (item.getShuliang() <= 0) {
+                                btnDuihuan.setText("商品数量不足");
+                                btnDuihuan.setEnabled(false);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            Toast.makeText(ShangChengDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
+                        }
+                    });
         }
 
         @Override

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,25 +38,6 @@ public class KuaiCanFragment extends Fragment {
         return inflater.inflate(R.layout.kuaican, container, false);
 
     }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden) {// 不在最前端界面显示
-
-
-        } else {// 重新显示到最前端中
-//            kcList.clear();
-//            pageIndex = 1;
-//            KuaiCanJsonHttpResponseHandler tt = new KuaiCanJsonHttpResponseHandler() {
-//                @Override
-//                public void OnSuccess(ArrayList<KuaiCanBean> kclist) {
-//                    kcList.addAll(kclist);
-//                }
-//            };
-//            addData(kc);
-        }
-    }
     private void GetHttpData(JsonHttpResponseHandler jhrh) {
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();
@@ -77,8 +59,15 @@ public class KuaiCanFragment extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Gson gson = new Gson();
                 ArrayList<KuaiCanBean> itemList= gson.fromJson(response.toString(),new TypeToken<ArrayList<KuaiCanBean>>(){}.getType());
+                if (itemList.size() < 10) {
+                    listView.setCanLoadMore(false);
+                }
                 kcList.addAll(itemList);
                 listView.setAdapter(kcAdapter);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
             }
         };
         GetHttpData(kc);
@@ -92,8 +81,15 @@ public class KuaiCanFragment extends Fragment {
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new Gson();
                         ArrayList<KuaiCanBean> itemList= gson.fromJson(response.toString(),new TypeToken<ArrayList<KuaiCanBean>>(){}.getType());
+                        if (itemList.size() < 10) {
+                            listView.setCanLoadMore(false);
+                        }
                         kcList.addAll(itemList);
                         listView.onRefreshComplete();
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
                 GetHttpData(kc);
@@ -108,8 +104,15 @@ public class KuaiCanFragment extends Fragment {
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                         Gson gson = new Gson();
                         ArrayList<KuaiCanBean> itemList= gson.fromJson(response.toString(),new TypeToken<ArrayList<KuaiCanBean>>(){}.getType());
+                        if (itemList.size() < 10) {
+                            listView.setCanLoadMore(false);
+                        }
                         kcList.addAll(itemList);
                         listView.onLoadMoreComplete();
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
                 GetHttpData(kc);

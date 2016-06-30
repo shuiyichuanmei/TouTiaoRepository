@@ -52,7 +52,7 @@ public class JiFenOrderAdapter extends MyBaseAdapter<JiFenOrderBean> {
 
         tmText.setText(beans.get(position).getCreatedate());
         mingcheng.setText(beans.get(position).getMingcheng());
-        dhText.setText(beans.get(position).getStatus());
+        dhText.setText(String.valueOf(beans.get(position).getSpJifen()));
         txtstatus.setText(beans.get(position).getStatus());
         ImageLoader.getInstance().displayImage(beans.get(position).getSpimg(), imgurl, options);
         return convertView;

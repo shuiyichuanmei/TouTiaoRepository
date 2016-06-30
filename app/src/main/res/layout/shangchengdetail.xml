@@ -59,7 +59,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnGetJiFen"
+        android:id="@+id/btnDuihuan"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

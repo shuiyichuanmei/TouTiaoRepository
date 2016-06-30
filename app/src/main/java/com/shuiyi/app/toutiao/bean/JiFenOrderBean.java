@@ -14,7 +14,7 @@ public class JiFenOrderBean {
     private int SpJifen;
     private String Spimg;
     private String status;
-
+    private String dingdanhao;
     private String createdate;
 
     public String getId() {
@@ -25,7 +25,20 @@ public class JiFenOrderBean {
         this.id = id;
     }
 
+    public void setSpJifen(int spJifen) {
+        SpJifen = spJifen;
+    }
+
+    public String getDingdanhao() {
+        return dingdanhao;
+    }
+
+    public void setDingdanhao(String dingdanhao) {
+        this.dingdanhao = dingdanhao;
+    }
+
     public String getMingcheng() {
+
         return mingcheng;
     }
 

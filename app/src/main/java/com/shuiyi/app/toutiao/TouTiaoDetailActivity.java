@@ -47,16 +47,16 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
     private ImageButton backButton;
     private Button btnGetJiFen;
     MyWebView webView;
-    int daojishi = 3;
+    int daojishi = 5;
     private Handler handler = new Handler();
     private Runnable myRunnable = new Runnable() {
         public void run() {
             if (daojishi <= 0) {
-                daojishi = 3;
+                daojishi = 5;
                 btnGetJiFen.setEnabled(true);
                 btnGetJiFen.setText("领取" + jifen + "积分");
             } else {
-                btnGetJiFen.setText("领取" + jifen + "积分(" + daojishi + ")");
+                btnGetJiFen.setText(daojishi + "秒后可领取" + jifen + "积分");
                 handler.postDelayed(this, 1000);
             }
             daojishi--;
@@ -107,25 +107,30 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                 ahu.get("http://toutiao.ishowyou.cc/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        if (statusCode != 200) {
-                            Toast.makeText(TouTiaoDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
-                            return;
-                        }
                         try {
                             String success = response.getString("success");
                             String msg = response.getString("msg");
                             if (success.equals("true")) {
                                 btnGetJiFen.setEnabled(false);
-                                btnGetJiFen.setText("已领取");
+                                btnGetJiFen.setText("已领取" + jifen + "积分");
 
                                 Intent intent = new Intent();
                                 intent.setAction("action.refreshFriend");
                                 sendBroadcast(intent);
-                            } else {
-                                Toast.makeText(TouTiaoDetailActivity.this, msg, Toast.LENGTH_LONG).show();
+                                Toast.makeText(TouTiaoDetailActivity.this, "恭喜您获得了" + jifen + "积分", Toast.LENGTH_LONG).show();
+
+                            } else if (success.equals("chongfu")) {
+                                btnGetJiFen.setEnabled(false);
+                                btnGetJiFen.setText("您之前领取过该条信息的积分");
+                                Toast.makeText(TouTiaoDetailActivity.this, "您之前领取过该条信息的积分", Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception ex) {
                         }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(TouTiaoDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -144,18 +149,11 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
             settings.setSupportZoom(false);// 用于设置webview放大
             settings.setBuiltInZoomControls(false);
             webView.setBackgroundResource(R.color.transparent);
-            //webView.addJavascriptInterface(new JavascriptInterface(getApplicationContext()),"imagelistner");// 添加js交互接口类，并起别名 imagelistner
             webView.setWebChromeClient(new MyWebChromeClient());//设置加载进度
             webView.setWebViewClient(new MyWebViewClient());
             new MyAsnycTask().execute(news_url);
         }
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//    }
 
     private class MyAsnycTask extends AsyncTask<String, String, String> {
 
@@ -171,45 +169,6 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         }
     }
 
-    // 注入js函数监听
-    private void addImageClickListner() {
-        // 这段js函数的功能就是，遍历所有的img几点，并添加onclick函数，在还是执行的时候调用本地接口传递url过去
-        webView.loadUrl("javascript:(function(){"
-                + "var objs = document.getElementsByTagName(\"img\");"
-                + "var imgurl=''; " + "for(var i=0;i<objs.length;i++)  " + "{"
-                + "imgurl+=objs[i].src+',';"
-                + "    objs[i].onclick=function()  " + "    {  "
-                + "        window.imagelistner.openImage(imgurl);  "
-                + "    }  " + "}" + "})()");
-    }
-
-    // js通信接口
-    public class JavascriptInterface {
-
-
-        private Context context;
-
-        public JavascriptInterface(Context context) {
-            this.context = context;
-        }
-
-        public void openImage(String img) {
-            System.out.println(img);
-            //
-            String[] imgs = img.split(",");
-            ArrayList<String> imgsUrl = new ArrayList<String>();
-            for (String s : imgs) {
-                imgsUrl.add(s);
-                //Log.i("图片的URL>>>>>>>>>>>>>>>>>>>>>>>", s);
-            }
-            Intent intent = new Intent();
-            intent.putStringArrayListExtra("infos", imgsUrl);
-            //intent.setClass(context, ImageShowActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
-    }
-
     // 监听
     private class MyWebViewClient extends WebViewClient {
         @Override
@@ -221,8 +180,6 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             view.getSettings().setJavaScriptEnabled(true);
             super.onPageFinished(view, url);
-            // html加载完成之后，添加监听图片的点击js函数
-            //addImageClickListner();
             progressBar.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             AsyncHttpUtil ahu = new AsyncHttpUtil();
@@ -234,10 +191,6 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
             ahu.get("http://toutiao.ishowyou.cc/Server/JiFenHandler.ashx", rp, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    if (statusCode != 200) {
-                        Toast.makeText(TouTiaoDetailActivity.this, "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
-                        return;
-                    }
                     try {
                         String success = response.getString("success");
                         if (success.equals("true")) {
@@ -246,12 +199,19 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             btnGetJiFen.setVisibility(View.VISIBLE);
                             handler.postDelayed(myRunnable, 0);
                         } else if (success.equals("chongfu")) {
+                            jifen = response.getInt("jifennum");
+                            jiFenId = response.getString("jifenid");
                             btnGetJiFen.setVisibility(View.VISIBLE);
                             btnGetJiFen.setEnabled(false);
-                            btnGetJiFen.setText("已领取");
+                            btnGetJiFen.setText("已领取" + jifen + "积分");
                         }
                     } catch (Exception ex) {
                     }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    Toast.makeText(TouTiaoDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                 }
             });
         }

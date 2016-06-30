@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 
@@ -26,6 +27,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.shuiyi.app.toutiao.adapter.KuaiCanAdapter;
 import com.shuiyi.app.toutiao.adapter.ShangChengAdapter;
 import com.shuiyi.app.toutiao.bean.KuaiCanBean;
@@ -52,21 +54,24 @@ public class ShangChengFragment extends Fragment {
     private String tel;
     private LinearLayout lotJifen;
     private LinearLayout myOrder;
-
+    private int daojishi = 0;
+    private Handler handler = new Handler();
+    private Runnable myRunnable = new Runnable() {
+        public void run() {
+            daojishi--;
+            if (daojishi <= 0) {
+                daojishi = 0;
+            } else {
+                handler.postDelayed(this, 1000);
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.shangcheng, container, false);
 
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {// 不在最前端界面显示
-            InitJifen();
-        }
     }
 
     @Override
@@ -96,34 +101,24 @@ public class ShangChengFragment extends Fragment {
             tel = Common.getSharedPreferences(getActivity(), "tel");
             AsyncHttpUtil ahu = new AsyncHttpUtil();
             RequestParams rp = new RequestParams();
-            rp.add("ft", "getjifen");
+            rp.add("ft", "GetJifen");
             rp.add("tel", tel);
-            ahu.get("http://toutiao.ishowyou.cc/Server/UserHandler.ashx", rp,
-                    new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            if (statusCode != 200) {
-                                Toast.makeText(getActivity(), "服务器无响应，请稍后重试。", Toast.LENGTH_LONG).show();
-                                return;
-                            }
-                            try {
-                                String success = response.getString("success");
-                                String msg = response.getString("msg");
-                                String jifen = response.getString("jifen");
-                                if (success.equals("true")) {
-                                    jifenUser.setText(jifen);
-                                    Drawable img_on, img_off;
-                                    Resources res = getResources();
-                                    img_off = res.getDrawable(R.drawable.icon_jifen_num);
-                                    img_off.setBounds(0, 0,30, 30);
-                                    jifenUser.setCompoundDrawables(img_off, null, null, null);
-                                } else {
-                                    Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-                                }
-                            } catch (Exception ex) {
-                            }
-                        }
-                    });
+            ahu.get("http://toutiao.ishowyou.cc/Server/UserHandler.ashx", rp, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
+                    Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onSuccess(int i, Header[] headers, String s) {
+                    jifenUser.setText(s);
+                    Drawable img_on, img_off;
+                    Resources res = getResources();
+                    img_off = res.getDrawable(R.drawable.icon_jifen_num);
+                    img_off.setBounds(0, 0, 30, 30);
+                    jifenUser.setCompoundDrawables(img_off, null, null, null);
+                }
+            });
         } else {
             jifenUser.setText("立即登录查看");
             jifenUser.setCompoundDrawables(null, null, null, null);
@@ -142,7 +137,19 @@ public class ShangChengFragment extends Fragment {
             public void onClick(View v) {
                 if (!Common.isDenglu(getActivity())) {
                     Intent intent = new Intent(getActivity(), DengluActivity.class);
-                    startActivityForResult(intent, 4);
+                    startActivity(intent);
+                } else {
+                    handler.removeCallbacks(myRunnable);
+                    daojishi++;
+                    if (daojishi >= 7) {
+                        daojishi = 0;
+                        Common.removeSharedPreferences(getActivity(), "tel");
+                        Common.removeSharedPreferences(getActivity(), "userId");
+                        InitJifen();
+                    } else {
+                        System.out.println(daojishi);
+                        handler.postDelayed(myRunnable, 1000);
+                    }
                 }
             }
         });
@@ -162,7 +169,7 @@ public class ShangChengFragment extends Fragment {
 
         AsyncHttpUtil ahu = new AsyncHttpUtil();
         RequestParams rp = new RequestParams();
-        rp.add("ft", "get");
+        rp.add("ft", "GetList");
         ahu.get("http://toutiao.ishowyou.cc/Server/JiFenShangPinHandler.ashx", rp,
                 new JsonHttpResponseHandler() {
                     @Override
@@ -172,6 +179,11 @@ public class ShangChengFragment extends Fragment {
                         }.getType());
                         scList.addAll(itemList);
                         gridView.setAdapter(scAdapter);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

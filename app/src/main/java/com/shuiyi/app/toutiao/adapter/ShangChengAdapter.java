@@ -37,11 +37,12 @@ public class ShangChengAdapter extends MyBaseAdapter<ShangChengBean> {
         ImageView spimg = (ImageView) ViewHolder.get(convertView, R.id.sp_img);
         TextView spname = (TextView) ViewHolder.get(convertView, R.id.sp_name);
         TextView spjifen = (TextView) ViewHolder.get(convertView, R.id.sp_jifen);
+        TextView sp_shuliang = (TextView) ViewHolder.get(convertView, R.id.sp_shuliang);
 
         Drawable[] drawable = spjifen.getCompoundDrawables();
         drawable[0].setBounds(0, 0, 30, 30);
         spjifen.setCompoundDrawables(drawable[0], drawable[1], drawable[2], drawable[3]);
-
+        sp_shuliang.setText(String.valueOf(beans.get(position).getShuliang()));
         spname.setText(beans.get(position).getMingcheng());
         spjifen.setText(String.valueOf(beans.get(position).getSpJifen()));
         ImageLoader.getInstance().displayImage(beans.get(position).getSpimg(), spimg, options);

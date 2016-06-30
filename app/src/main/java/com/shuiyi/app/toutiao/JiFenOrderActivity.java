@@ -56,6 +56,7 @@ public class JiFenOrderActivity extends AppCompatActivity {
         RequestParams rp = new RequestParams();
         rp.add("page", String.valueOf(pageIndex));
         rp.add("tel", tel);
+        rp.add("ft", "GetList");
         ahu.get("http://toutiao.ishowyou.cc/Server/JiFenOrderHandler.ashx", rp, jhrh);
     }
 
@@ -87,8 +88,6 @@ public class JiFenOrderActivity extends AppCompatActivity {
                     line.setVisibility(View.VISIBLE);
                     listView.setVisibility(View.GONE);
                 }
-
-
             }
         };
         GetHttpData(kc);

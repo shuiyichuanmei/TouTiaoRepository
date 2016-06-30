@@ -10,14 +10,14 @@
         android:background="#f33"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/btn_click_bg"
-            android:padding="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/button_sreach" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/imageButton"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:background="@drawable/btn_click_bg"-->
+            <!--android:padding="10dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:src="@drawable/button_sreach" />-->
 
         <TextView
             android:id="@+id/txtTitle"
@@ -29,14 +29,14 @@
             android:textColor="#fff"
             android:textSize="23dp" />
 
-        <ImageButton
-            android:id="@+id/btnShoucang"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/btn_click_bg"
-            android:padding="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/menu_shoucang" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/btnShoucang"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:background="@drawable/btn_click_bg"-->
+            <!--android:padding="10dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:src="@drawable/menu_shoucang" />-->
 
     </LinearLayout>
 

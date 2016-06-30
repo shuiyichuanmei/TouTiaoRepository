@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_click_bg"
         android:orientation="vertical"
-
         android:padding="5dp">
 
         <ImageView
@@ -27,17 +26,35 @@
             android:id="@+id/sp_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#333333"
-             />
+            android:textColor="#333333" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_gravity="right"
-            android:id="@+id/sp_jifen"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="300"
-            android:drawableLeft="@drawable/icon_jifen_num"/>
+            <TextView
+                android:id="@+id/titleshuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:text="数量:" />
+
+            <TextView
+                android:id="@+id/sp_shuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/titleshuliang"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/sp_jifen"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/icon_jifen_num"
+                android:text="300" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

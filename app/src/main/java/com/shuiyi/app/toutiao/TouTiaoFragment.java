@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,9 +38,7 @@ public class TouTiaoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.toutiao, container, false);
-
         typeid = getArguments().getString("typeid");
-
         findView(view);
         return view;
     }
@@ -47,10 +46,7 @@ public class TouTiaoFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (hidden) {// 不在最前端界面显示
-
-
-        } else {// 重新显示到最前端中
+        if (!hidden) {
 //            ttList.clear();
 //            pageIndex = 1;
 //            TouTiaoJsonHttpResponseHandler tt = new TouTiaoJsonHttpResponseHandler() {
@@ -68,13 +64,11 @@ public class TouTiaoFragment extends Fragment {
         RequestParams rp = new RequestParams();
         rp.add("page", String.valueOf(pageIndex));
         rp.add("typeid", typeid);
-        //ahu.get("http://toutiao.ishowyou.cc/TouTiaoHandler.ashx", rp, jhrh);
         ahu.get("http://toutiao.ishowyou.cc/Server/NewsHandler.ashx", rp, jhrh);
     }
 
 
     private void findView(View view) {
-
         listView = (CustomListView) view.findViewById(R.id.listView);
         ttList = new ArrayList<TouTiaoBean>();
         ttAdapter = new TouTiaoAdapter(getActivity(), ttList);
@@ -87,6 +81,10 @@ public class TouTiaoFragment extends Fragment {
                 ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                 ttList.addAll(itemList);
                 listView.setAdapter(ttAdapter);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
             }
         };
         addData(jhrh);
@@ -107,8 +105,11 @@ public class TouTiaoFragment extends Fragment {
                         ttList.addAll(itemList);
                         listView.onRefreshComplete();
                     }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
+                    }
                 };
-
                 addData(jhrh);
             }
         });
@@ -126,6 +127,10 @@ public class TouTiaoFragment extends Fragment {
                         ArrayList<TouTiaoBean> itemList = gson.fromJson(response.toString(), type);
                         ttList.addAll(itemList);
                         listView.onLoadMoreComplete();
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
                 addData(jhrh);

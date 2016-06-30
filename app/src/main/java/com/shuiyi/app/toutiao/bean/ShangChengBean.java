@@ -11,6 +11,15 @@ public class ShangChengBean {
     private String mingcheng;
     private int SpJifen;
     private String Spimg;
+    private int shuliang;
+
+    public int getShuliang() {
+        return shuliang;
+    }
+
+    public void setShuliang(int shuliang) {
+        this.shuliang = shuliang;
+    }
 
     public String getId() {
         return id;

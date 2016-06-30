@@ -44,15 +44,14 @@ public class XinWenFragment extends Fragment {
 
     private ImageButton searchbtn;
     private ImageButton btnShoucang;
+    private View contentview;
+    private List<Fragment> xinwen_framentlist;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         initdata();
         super.onCreate(savedInstanceState);
     }
-
-    @Nullable
-    private View contentview;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (contentview == null) {
@@ -66,10 +65,6 @@ public class XinWenFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initview();
     }
-
-    private FragmentManager fragmentManager;
-
-    private List<Fragment> xinwen_framentlist;
 
     //初始化数据
     private void initdata() {
@@ -91,38 +86,40 @@ public class XinWenFragment extends Fragment {
         bundletiyu.putString("typeid", "9CCAEC8A-9277-4810-BB89-26F703B82DB1");
         tiyu.setArguments(bundletiyu);
         xinwen_framentlist.add(tiyu);
-
     }
-
 
     //初始化控件
     private void initview() {
         View view = contentview;
-        searchbtn = (ImageButton) view.findViewById(R.id.imageButton);
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Common.isDenglu(getActivity())) {
-                    Common.removeSharedPreferences(getActivity(), "tel");
-                }
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnShoucang = (ImageButton) view.findViewById(R.id.btnShoucang);
-        btnShoucang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!Common.isDenglu(getActivity())) {
-                    Intent intent = new Intent(getActivity(), DengluActivity.class);
-                    startActivity(intent);
-                    return;
-                }
-                Intent intent = new Intent(getActivity(), Welcome.class);
-                startActivity(intent);
-            }
-        });
+//        searchbtn = (ImageButton) view.findViewById(R.id.imageButton);
+//        searchbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Common.isDenglu(getActivity())) {
+//                    Common.removeSharedPreferences(getActivity(), "tel");
+//                    Common.removeSharedPreferences(getActivity(), "userId");
+//                    Intent intent = new Intent();
+//                    intent.setAction("action.refreshFriend");
+//                    getActivity().sendBroadcast(intent);
+//                }
+//                Intent intent = new Intent(getActivity(), SearchActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        btnShoucang = (ImageButton) view.findViewById(R.id.btnShoucang);
+//        btnShoucang.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!Common.isDenglu(getActivity())) {
+//                    Intent intent = new Intent(getActivity(), DengluActivity.class);
+//                    startActivity(intent);
+//                    return;
+//                }
+//                Intent intent = new Intent(getActivity(), Welcome.class);
+//                startActivity(intent);
+//            }
+//        });
 
         //新闻导航栏控件
         final RadioGroup xinwen_Rradio = (RadioGroup) view.findViewById(R.id.xinwen_radiogroup);
