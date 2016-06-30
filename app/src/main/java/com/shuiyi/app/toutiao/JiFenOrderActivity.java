@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +30,7 @@ import com.shuiyi.app.toutiao.view.CustomListView;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -89,6 +91,10 @@ public class JiFenOrderActivity extends AppCompatActivity {
                     listView.setVisibility(View.GONE);
                 }
             }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(JiFenOrderActivity.this, "网络异常", Toast.LENGTH_LONG).show();
+            }
         };
         GetHttpData(kc);
         listView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
@@ -107,6 +113,10 @@ public class JiFenOrderActivity extends AppCompatActivity {
                         }
                         jifenList.addAll(itemList);
                         listView.onRefreshComplete();
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        Toast.makeText(JiFenOrderActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
                 GetHttpData(kc);
@@ -127,6 +137,10 @@ public class JiFenOrderActivity extends AppCompatActivity {
                         }
                         jifenList.addAll(itemList);
                         listView.onLoadMoreComplete();
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        Toast.makeText(JiFenOrderActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
                 GetHttpData(kc);

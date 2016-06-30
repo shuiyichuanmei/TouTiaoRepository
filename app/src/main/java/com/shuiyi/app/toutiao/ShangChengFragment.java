@@ -97,6 +97,7 @@ public class ShangChengFragment extends Fragment {
     };
 
     private void InitJifen() {
+        jifenUser.setCompoundDrawables(null, null, null, null);
         if (Common.isDenglu(getActivity())) {
             tel = Common.getSharedPreferences(getActivity(), "tel");
             AsyncHttpUtil ahu = new AsyncHttpUtil();
@@ -147,7 +148,7 @@ public class ShangChengFragment extends Fragment {
                         Common.removeSharedPreferences(getActivity(), "userId");
                         InitJifen();
                     } else {
-                        System.out.println(daojishi);
+
                         handler.postDelayed(myRunnable, 1000);
                     }
                 }
@@ -182,7 +183,7 @@ public class ShangChengFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 });

@@ -20,6 +20,7 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class TouTiaoFragment extends Fragment {
                 listView.setAdapter(ttAdapter);
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
             }
         };
@@ -106,7 +107,7 @@ public class TouTiaoFragment extends Fragment {
                         listView.onRefreshComplete();
                     }
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
@@ -129,7 +130,7 @@ public class TouTiaoFragment extends Fragment {
                         listView.onLoadMoreComplete();
                     }
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };

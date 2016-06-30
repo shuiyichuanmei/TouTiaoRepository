@@ -196,7 +196,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             Toast.makeText(ShangChengDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                         }
                     });

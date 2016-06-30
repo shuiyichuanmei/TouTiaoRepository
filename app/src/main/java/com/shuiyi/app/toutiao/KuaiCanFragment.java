@@ -20,6 +20,7 @@ import com.shuiyi.app.toutiao.view.CustomListView;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ public class KuaiCanFragment extends Fragment {
                 listView.setAdapter(kcAdapter);
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
             }
         };
@@ -88,7 +89,7 @@ public class KuaiCanFragment extends Fragment {
                         listView.onRefreshComplete();
                     }
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };
@@ -111,7 +112,7 @@ public class KuaiCanFragment extends Fragment {
                         listView.onLoadMoreComplete();
                     }
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
                     }
                 };

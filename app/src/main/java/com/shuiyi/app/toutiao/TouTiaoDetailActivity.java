@@ -129,7 +129,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Toast.makeText(TouTiaoDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -210,7 +210,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                     Toast.makeText(TouTiaoDetailActivity.this, "网络异常", Toast.LENGTH_LONG).show();
                 }
             });
