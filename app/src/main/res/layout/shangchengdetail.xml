@@ -30,9 +30,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text=""
                 android:textColor="#fff"
-                android:textSize="20dp" />
+                android:textSize="23dp"
+                android:text="商品详情"
+                android:layout_marginRight="45dp"
+                />
 
         </LinearLayout>
 

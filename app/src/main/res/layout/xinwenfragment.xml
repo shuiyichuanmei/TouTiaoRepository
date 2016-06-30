@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -26,7 +27,7 @@
             android:gravity="center"
             android:text="宝清头条"
             android:textColor="#fff"
-            android:textSize="25sp" />
+            android:textSize="23dp" />
 
         <ImageButton
             android:id="@+id/btnShoucang"
@@ -38,57 +39,70 @@
             android:src="@drawable/menu_shoucang" />
 
     </LinearLayout>
-    <HorizontalScrollView
-        android:id="@+id/xinwen_scroll"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:orientation="vertical"
+        android:background="@color/white">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/xinwen_scroll"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:scrollbars="none">
 
-            <RadioGroup
-                android:id="@+id/xinwen_radiogroup"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/xinwen_rb1"
-                    style="@style/radio_style"
-                    android:checked="true"
-                    android:text="头条" />
-
-                <RadioButton
-                    android:id="@+id/xinwen_rb2"
-                    style="@style/radio_style"
-                    android:text="便民" />
-
-                <RadioButton
-                    android:id="@+id/xinwen_rb3"
-                    style="@style/radio_style"
-                    android:text="优惠" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/xinwen_indicator"
-                android:layout_width="@dimen/xinwen_xia_text"
-                android:layout_height="2dp"
-                android:background="#E30E0C" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E30E0C" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </HorizontalScrollView>
+                <RadioGroup
+                    android:id="@+id/xinwen_radiogroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:typeface="monospace"
+                        android:id="@+id/xinwen_rb1"
+                        style="@style/radio_style"
+                        android:checked="true"
+                        android:text="头条" />
+
+                    <RadioButton
+                        android:typeface="monospace"
+                        android:id="@+id/xinwen_rb2"
+                        style="@style/radio_style"
+                        android:text="便民" />
+
+                    <RadioButton
+                        android:typeface="monospace"
+                        android:id="@+id/xinwen_rb3"
+                        style="@style/radio_style"
+                        android:text="优惠" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/xinwen_indicator"
+                    android:layout_width="@dimen/xinwen_xia_text"
+                    android:layout_height="2dp"
+                    android:background="#f33" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f33" />
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/xinwen_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
 </LinearLayout>

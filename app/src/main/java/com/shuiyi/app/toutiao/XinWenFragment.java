@@ -137,18 +137,18 @@ public class XinWenFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 //选中的RadioButton播放动画
-                ScaleAnimation sAnim = new ScaleAnimation(1, 1.1f, 1, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                sAnim.setDuration(500);
-                sAnim.setFillAfter(true);
+//                ScaleAnimation sAnim = new ScaleAnimation(1, 1.1f, 1, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//                sAnim.setDuration(500);
+//                sAnim.setFillAfter(true);
                 //遍历所有的RadioButton
-                for (int i = 0; i < group.getChildCount(); i++) {
-                    RadioButton radioBtn = (RadioButton) group.getChildAt(i);
-                    if (radioBtn.isChecked()) {
-                        radioBtn.startAnimation(sAnim);
-                    } else {
-                        radioBtn.clearAnimation();
-                    }
-                }
+//                for (int i = 0; i < group.getChildCount(); i++) {
+//                    RadioButton radioBtn = (RadioButton) group.getChildAt(i);
+//                    if (radioBtn.isChecked()) {
+//                        radioBtn.startAnimation(sAnim);
+//                    } else {
+//                        radioBtn.clearAnimation();
+//                    }
+//                }
                 switch (checkedId) {
                     case R.id.xinwen_rb1:
                         xinwen_viewpage.setCurrentItem(0);

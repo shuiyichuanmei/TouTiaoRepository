@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:gravity="center"
             android:text="宝清平台"
             android:textColor="#fff"
-            android:textSize="25sp" />
+            android:textSize="23dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:text="东方快餐网上订餐"
                     android:textColor="#333333"
-                    android:textSize="18sp" />
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <TextView
@@ -65,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:text="在线订餐 餐到付款 优先配送"
                 android:textColor="#999999" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -83,6 +85,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
 
     <LinearLayout
         android:id="@+id/lay_dafu"
@@ -109,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="大福春艳在线外卖"
                 android:textColor="#333333"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -141,6 +148,11 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
     <LinearLayout
         android:id="@+id/lay_sjxnb"
         android:layout_width="match_parent"
@@ -166,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:text="四季鲜奶吧"
                 android:textColor="#333333"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -198,6 +210,11 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
+
     <LinearLayout
         android:id="@+id/lay_zghj"
         android:layout_width="match_parent"
@@ -223,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:text="宝清中国黄金"
                 android:textColor="#333333"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -255,5 +272,9 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc" />
 
 </LinearLayout>

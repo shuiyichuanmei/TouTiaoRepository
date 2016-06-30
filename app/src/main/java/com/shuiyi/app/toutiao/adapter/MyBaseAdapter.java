@@ -55,4 +55,5 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 	 */
 	protected void onReachBottom() {
 	};
+
 }
