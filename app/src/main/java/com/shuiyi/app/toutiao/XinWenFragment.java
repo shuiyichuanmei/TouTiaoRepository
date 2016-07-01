@@ -75,17 +75,19 @@ public class XinWenFragment extends Fragment {
         toutiao.setArguments(bundletoutiao);
         xinwen_framentlist.add(toutiao);
 
-        TouTiaoFragment yule = new TouTiaoFragment();
-        Bundle bundleyule = new Bundle();
-        bundleyule.putString("typeid", "9CCAEC8A-9277-4810-BB89-26F703B82DB4");
-        yule.setArguments(bundleyule);
-        xinwen_framentlist.add(yule);
+
 
         TouTiaoFragment tiyu = new TouTiaoFragment();
         Bundle bundletiyu = new Bundle();
         bundletiyu.putString("typeid", "9CCAEC8A-9277-4810-BB89-26F703B82DB1");
         tiyu.setArguments(bundletiyu);
         xinwen_framentlist.add(tiyu);
+
+        TouTiaoFragment yule = new TouTiaoFragment();
+        Bundle bundleyule = new Bundle();
+        bundleyule.putString("typeid", "9CCAEC8A-9277-4810-BB89-26F703B82DB4");
+        yule.setArguments(bundleyule);
+        xinwen_framentlist.add(yule);
     }
 
     //初始化控件
