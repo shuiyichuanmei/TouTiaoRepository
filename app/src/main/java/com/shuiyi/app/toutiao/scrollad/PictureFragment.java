@@ -22,9 +22,9 @@ public class PictureFragment extends BaseFragment {
 	public PictureFragment() {
 	}
 
-	public PictureFragment(ArrayList<ImageBean> mImageUrl) {
-		this.mImageUrl = mImageUrl;
-	}
+//	public PictureFragment(ArrayList<ImageBean> mImageUrl) {
+//		this.mImageUrl = mImageUrl;
+//	}
 
 	public void setData(ArrayList<ImageBean> mImageUrl) {
 		this.mImageUrl = mImageUrl;
