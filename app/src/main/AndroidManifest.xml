@@ -22,12 +22,6 @@
         <activity
             android:name=".Welcome"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -35,6 +29,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
         </activity>
         <activity
             android:name=".SearchActivity"
