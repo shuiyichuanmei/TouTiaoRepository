@@ -64,7 +64,7 @@
         <RadioButton
             android:id="@+id/rbFour"
             style="@style/toolbar_button_style"
-            android:drawableTop="@drawable/main_tab3img"
+            android:drawableTop="@drawable/main_tab4img"
             android:text="商城" />
 
     </RadioGroup>

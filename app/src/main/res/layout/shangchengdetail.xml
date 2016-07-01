@@ -62,8 +62,11 @@
         android:id="@+id/btnDuihuan"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/orangeFAB615"
         android:text="我要兑换"
-        android:visibility="gone" />
+        android:textColor="@color/white"
+        android:background="@drawable/denglu_btn_click"
+        android:visibility="gone"
+        />
 </RelativeLayout>

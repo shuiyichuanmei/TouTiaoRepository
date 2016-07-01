@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -120,6 +121,8 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                                     Toast.makeText(ShangChengDetailActivity.this, "商品数量不足", Toast.LENGTH_LONG).show();
                                     webView.reload();
                                     btnDuihuan.setText("商品数量不足");
+                                    btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                    btnDuihuan.setBackgroundResource(R.drawable.btn_false);
                                     btnDuihuan.setEnabled(false);
                                 } else if (s.equals("jifenbuzu")) {
                                     Toast.makeText(ShangChengDetailActivity.this, "您的积分不足", Toast.LENGTH_LONG).show();
@@ -191,6 +194,8 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                             btnDuihuan.setVisibility(View.VISIBLE);
                             if (item.getShuliang() <= 0) {
                                 btnDuihuan.setText("商品数量不足");
+                                btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                btnDuihuan.setBackgroundResource(R.drawable.btn_false);
                                 btnDuihuan.setEnabled(false);
                             }
                         }
