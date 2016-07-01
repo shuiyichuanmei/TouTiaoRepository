@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/first"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:orientation="vertical"
+
+        >
 
         <LinearLayout
             android:id="@+id/tool_bar_layout"
@@ -55,15 +61,19 @@
             android:layout_marginRight="10.0dip"
             android:max="100"
             android:visibility="gone" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/btnGetJiFen"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/orangeFAB615"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/denglu_btn_click"
         android:enabled="false"
         android:text=""
-        android:visibility="invisible" />
-</RelativeLayout>
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+</LinearLayout>

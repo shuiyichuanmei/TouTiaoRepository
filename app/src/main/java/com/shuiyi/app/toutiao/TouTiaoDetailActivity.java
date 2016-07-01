@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
     private String tel;
     private ImageButton backButton;
     private Button btnGetJiFen;
+    private LinearLayout linearLayout;
     MyWebView webView;
     int daojishi = 5;
     private Handler handler = new Handler();
@@ -55,9 +58,13 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                 daojishi = 5;
                 btnGetJiFen.setEnabled(true);
                 btnGetJiFen.setText("领取" + jifen + "积分");
+                btnGetJiFen.setBackgroundResource(R.drawable.denglu_btn_click);
+                btnGetJiFen.setTextColor(Color.parseColor("#ffffff"));
             } else {
                 btnGetJiFen.setText(daojishi + "秒后可领取" + jifen + "积分");
                 handler.postDelayed(this, 1000);
+                btnGetJiFen.setTextColor(Color.parseColor("#999999"));
+                btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
             }
             daojishi--;
         }
@@ -74,6 +81,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + tid;
         tel = Common.getSharedPreferences(TouTiaoDetailActivity.this, "tel");
 
+
         initView();
         initWebView();
     }
@@ -82,6 +90,8 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
         backButton = (ImageButton) this.findViewById(R.id.imageButton);
+        linearLayout= (LinearLayout) this.findViewById(R.id.first);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +123,8 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             if (success.equals("true")) {
                                 btnGetJiFen.setEnabled(false);
                                 btnGetJiFen.setText("已领取" + jifen + "积分");
-
+                                btnGetJiFen.setTextColor(Color.parseColor("#999999"));
+                                btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
                                 Intent intent = new Intent();
                                 intent.setAction("action.refreshFriend");
                                 sendBroadcast(intent);
@@ -122,6 +133,8 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             } else if (success.equals("chongfu")) {
                                 btnGetJiFen.setEnabled(false);
                                 btnGetJiFen.setText("您之前领取过该条信息的积分");
+                                btnGetJiFen.setTextColor(Color.parseColor("#999999"));
+                                btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
                                 Toast.makeText(TouTiaoDetailActivity.this, "您之前领取过该条信息的积分", Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception ex) {
@@ -177,7 +190,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onPageFinished(WebView view, String url) {
+        public void onPageFinished(final WebView view, String url) {
             view.getSettings().setJavaScriptEnabled(true);
             super.onPageFinished(view, url);
             progressBar.setVisibility(View.GONE);
@@ -204,6 +217,9 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             btnGetJiFen.setVisibility(View.VISIBLE);
                             btnGetJiFen.setEnabled(false);
                             btnGetJiFen.setText("已领取" + jifen + "积分");
+                            btnGetJiFen.setTextColor(Color.parseColor("#999999"));
+                            btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
+
                         }
                     } catch (Exception ex) {
                     }
