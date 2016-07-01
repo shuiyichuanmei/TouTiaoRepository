@@ -28,19 +28,19 @@ import java.util.Map;
  */
 public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
     private DisplayImageOptions options = null;
-    private  ArrayList<ImageBean> 	guideImgs;
-    private  Context curcontext;
-    private PictureFragment fragment ;
+    private Context curcontext;
+    private PictureFragment fragment;
     private ImageCycleView mAdView;
 
     public TouTiaoAdapter(Context context, ArrayList<TouTiaoBean> beans) {
         super(context, beans);
-        curcontext=context;
+        curcontext = context;
         options = DPImageOptions.getDefaultOption(R.drawable.ic_stub,
                 R.drawable.ic_stub, R.drawable.ic_stub, false);
 
-        guideImgs = new ArrayList<ImageBean>();
+
     }
+
     private ImageCycleView.ImageCycleViewListener mAdCycleViewListener = new ImageCycleView.ImageCycleViewListener() {
         @Override
         public void onImageClick(int position, View imageView) {
@@ -64,51 +64,30 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
         }
     };
 
-    private void addData() {
-        for (int i = 0; i < 3; i++) {
-            ImageBean imageBean = new ImageBean();
-            switch (i) {
-                case 0:
-                    imageBean
-                            .setImgurl("http://121.40.116.207/a-mj01/images/pa1_首页/u9.png");
-
-                    break;
-                case 1:
-                    imageBean
-                            .setImgurl("http://121.40.116.207/a-mj01/images/pa1_首页/u5.png");
-
-                    break;
-                case 2:
-                    imageBean
-                            .setImgurl("http://121.40.116.207/a-mj01/images/pa1_首页/u13.png");
-
-                    break;
-
-                default:
-                    break;
-            }
-
-            guideImgs.add(imageBean);
-        }
-
-    }
     @Override
     protected View getExView(final int position, View convertView, ViewGroup parent) {
 //        if (convertView == null) {
 //            convertView = mInflater.inflate(R.layout.item_toutiao, parent, false);
 //        }
-
-        if(position==0){
+        String type = beans.get(position).getTypeId();
+        if (type.equals("广告")) {
             convertView = mInflater.inflate(R.layout.firstitem, parent, false);
-            addData();
-            mAdView = (ImageCycleView) convertView.findViewById(R.id.ad_view);
+            String imgurl = beans.get(position).getTitleImg();
+            String[] imgs = imgurl.toString().split("&");
+            ArrayList<ImageBean> guideImgs = new ArrayList<ImageBean>();
+            for (int i = 0; i < imgs.length; i++) {
+                ImageBean imageBean = new ImageBean();
+                imageBean.setImgurl(imgs[i]);
+                guideImgs.add(imageBean);
+            }
+            mAdView = (ImageCycleView) ViewHolder.get(convertView, R.id.ad_view);
             mAdView.setImageResources(guideImgs, mAdCycleViewListener);
 
 //            ImageView imgTitle = (ImageView) ViewHolder.get(convertView,
 //                    R.id.imageView);
 //            imgTitle.setImageResource(R.drawable.sc_top_img);
             return convertView;
-        }else{
+        } else {
             convertView = mInflater.inflate(R.layout.item_toutiao, parent, false);
             ImageView imgTitle = (ImageView) ViewHolder.get(convertView,
                     R.id.imgTitle);
