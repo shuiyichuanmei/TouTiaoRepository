@@ -117,6 +117,12 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                                     Intent intent = new Intent();
                                     intent.setAction("action.refreshFriend");
                                     sendBroadcast(intent);
+                                } else if (s.equals("yixiajia")) {
+                                    Toast.makeText(ShangChengDetailActivity.this, "商品已下架", Toast.LENGTH_LONG).show();
+                                    btnDuihuan.setText("商品已下架");
+                                    btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                    btnDuihuan.setBackgroundResource(R.drawable.btn_false);
+                                    btnDuihuan.setEnabled(false);
                                 } else if (s.equals("shuliangbuzu")) {
                                     Toast.makeText(ShangChengDetailActivity.this, "商品数量不足", Toast.LENGTH_LONG).show();
                                     webView.reload();
@@ -192,7 +198,12 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                             ShangChengBean item = gson.fromJson(response.toString(), new TypeToken<ShangChengBean>() {
                             }.getType());
                             btnDuihuan.setVisibility(View.VISIBLE);
-                            if (item.getShuliang() <= 0) {
+                            if (item.getStatus().equals("已下架")) {
+                                btnDuihuan.setText("商品已下架");
+                                btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                btnDuihuan.setBackgroundResource(R.drawable.btn_false);
+                                btnDuihuan.setEnabled(false);
+                            } else if (item.getShuliang() <= 0) {
                                 btnDuihuan.setText("商品数量不足");
                                 btnDuihuan.setTextColor(Color.parseColor("#999999"));
                                 btnDuihuan.setBackgroundResource(R.drawable.btn_false);

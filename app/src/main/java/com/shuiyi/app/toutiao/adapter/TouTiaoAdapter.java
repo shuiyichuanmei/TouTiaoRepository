@@ -39,7 +39,7 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
         options = DPImageOptions.getDefaultOption(R.drawable.ic_stub,
                 R.drawable.ic_stub, R.drawable.ic_stub, false);
 
-        guideImgs = new ArrayList<ImageBean>();
+
     }
     private ImageCycleView.ImageCycleViewListener mAdCycleViewListener = new ImageCycleView.ImageCycleViewListener() {
         @Override
@@ -65,6 +65,7 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
     };
 
     private void addData() {
+        guideImgs = new ArrayList<ImageBean>();
         for (int i = 0; i < 3; i++) {
             ImageBean imageBean = new ImageBean();
             switch (i) {
@@ -101,7 +102,7 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
         if(position==0){
             convertView = mInflater.inflate(R.layout.firstitem, parent, false);
             addData();
-            mAdView = (ImageCycleView) convertView.findViewById(R.id.ad_view);
+            mAdView = (ImageCycleView) ViewHolder.get(convertView,R.id.ad_view);
             mAdView.setImageResources(guideImgs, mAdCycleViewListener);
 
 //            ImageView imgTitle = (ImageView) ViewHolder.get(convertView,
