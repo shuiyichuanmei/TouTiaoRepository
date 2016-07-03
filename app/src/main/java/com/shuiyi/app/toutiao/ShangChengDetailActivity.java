@@ -88,6 +88,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                     startActivity(intent);
                     return;
                 }
+                tel = Common.getSharedPreferences(ShangChengDetailActivity.this, "tel");
                 AsyncHttpUtil ahu = new AsyncHttpUtil();
                 RequestParams rp = new RequestParams();
                 rp.add("ft", "duihuan");
@@ -103,6 +104,10 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(int i, Header[] headers, String s) {
                                 if (s.equals("ok")) {
+                                    btnDuihuan.setText("兑换成功");
+                                    btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                    btnDuihuan.setBackgroundResource(R.drawable.btn_false);
+                                    btnDuihuan.setEnabled(false);
                                     AlertDialog.Builder builder = new AlertDialog.Builder(ShangChengDetailActivity.this);
                                     builder.setMessage("兑换成功,请尽快领取。\n可在礼物查询中查看兑换记录。");
                                     builder.setTitle("兑换信息");
@@ -117,6 +122,12 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                                     Intent intent = new Intent();
                                     intent.setAction("action.refreshFriend");
                                     sendBroadcast(intent);
+                                } else if (s.equals("yiduihuan")) {
+                                    Toast.makeText(ShangChengDetailActivity.this, "您已兑换过这个礼品", Toast.LENGTH_LONG).show();
+                                    btnDuihuan.setText("一个账号只能兑换一次");
+                                    btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                    btnDuihuan.setBackgroundResource(R.drawable.btn_false);
+                                    btnDuihuan.setEnabled(false);
                                 } else if (s.equals("yixiajia")) {
                                     Toast.makeText(ShangChengDetailActivity.this, "商品已下架", Toast.LENGTH_LONG).show();
                                     btnDuihuan.setText("商品已下架");
@@ -133,6 +144,9 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                                 } else if (s.equals("jifenbuzu")) {
                                     Toast.makeText(ShangChengDetailActivity.this, "您的积分不足", Toast.LENGTH_LONG).show();
                                 }
+                                Intent intent = new Intent();
+                                intent.setAction("action.refreshShangPin");
+                                sendBroadcast(intent);
                             }
                         }
                 );
@@ -189,6 +203,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
             AsyncHttpUtil ahu = new AsyncHttpUtil();
             RequestParams rp = new RequestParams();
             rp.add("ft", "get");
+            rp.add("tel", tel);
             rp.add("id", spid);
             ahu.get("http://toutiao.ishowyou.cc/Server/JiFenShangPinHandler.ashx", rp,
                     new JsonHttpResponseHandler() {
@@ -198,7 +213,12 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                             ShangChengBean item = gson.fromJson(response.toString(), new TypeToken<ShangChengBean>() {
                             }.getType());
                             btnDuihuan.setVisibility(View.VISIBLE);
-                            if (item.getStatus().equals("已下架")) {
+                            if (item.isDuiHuan()) {
+                                btnDuihuan.setText("一个账号只能兑换一次");
+                                btnDuihuan.setTextColor(Color.parseColor("#999999"));
+                                btnDuihuan.setBackgroundResource(R.drawable.btn_false);
+                                btnDuihuan.setEnabled(false);
+                            } else if (item.getStatus().equals("已下架")) {
                                 btnDuihuan.setText("商品已下架");
                                 btnDuihuan.setTextColor(Color.parseColor("#999999"));
                                 btnDuihuan.setBackgroundResource(R.drawable.btn_false);

@@ -83,6 +83,9 @@ public class ShangChengFragment extends Fragment {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("action.refreshFriend");
         getActivity().registerReceiver(mRefreshBroadcastReceiver, intentFilter);
+        IntentFilter intentFilter2 = new IntentFilter();
+        intentFilter2.addAction("action.refreshShangPin");
+        getActivity().registerReceiver(mRefreshBroadcastReceiver, intentFilter2);
     }
 
     private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
@@ -92,6 +95,27 @@ public class ShangChengFragment extends Fragment {
             String action = intent.getAction();
             if (action.equals("action.refreshFriend")) {
                 InitJifen();
+            } else if (action.equals("action.refreshShangPin")) {
+                scList.clear();
+                AsyncHttpUtil ahu = new AsyncHttpUtil();
+                RequestParams rp = new RequestParams();
+                rp.add("ft", "GetList");
+                ahu.get("http://toutiao.ishowyou.cc/Server/JiFenShangPinHandler.ashx", rp,
+                        new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                                Gson gson = new Gson();
+                                ArrayList<ShangChengBean> itemList = gson.fromJson(response.toString(), new TypeToken<ArrayList<ShangChengBean>>() {
+                                }.getType());
+                                scList.addAll(itemList);
+                                scAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         }
     };

@@ -96,6 +96,7 @@ public class TouTiaoFragment extends Fragment {
             public void onRefresh() {
                 ttList.clear();
                 pageIndex = 1;
+                listView.setCanLoadMore(true);
                 JsonHttpResponseHandler jhrh = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

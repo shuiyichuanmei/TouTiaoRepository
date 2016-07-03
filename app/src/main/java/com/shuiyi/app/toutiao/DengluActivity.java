@@ -160,7 +160,7 @@ public class DengluActivity extends AppCompatActivity {
                                     Intent intent = new Intent();
                                     intent.setAction("action.refreshFriend");
                                     sendBroadcast(intent);
-                                    Toast.makeText(DengluActivity.this, "登录成功", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(DengluActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                                     onBackPressed();
                                 }
                             }

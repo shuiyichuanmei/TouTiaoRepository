@@ -100,9 +100,7 @@ public class XinWenFragment extends Fragment {
 //                if (Common.isDenglu(getActivity())) {
 //                    Common.removeSharedPreferences(getActivity(), "tel");
 //                    Common.removeSharedPreferences(getActivity(), "userId");
-//                    Intent intent = new Intent();
-//                    intent.setAction("action.refreshFriend");
-//                    getActivity().sendBroadcast(intent);
+//
 //                }
 //                Intent intent = new Intent(getActivity(), SearchActivity.class);
 //                startActivity(intent);

@@ -12,6 +12,15 @@ public class ShangChengBean {
     private int SpJifen;
     private String Spimg;
     private int shuliang;
+    private boolean isDuiHuan;
+
+    public boolean isDuiHuan() {
+        return isDuiHuan;
+    }
+
+    public void setDuiHuan(boolean duiHuan) {
+        isDuiHuan = duiHuan;
+    }
 
     public String getStatus() {
         return status;

@@ -77,6 +77,7 @@ public class KuaiCanFragment extends Fragment {
             public void onRefresh() {
                 kcList.clear();
                 pageIndex = 1;
+                listView.setCanLoadMore(true);
                 JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

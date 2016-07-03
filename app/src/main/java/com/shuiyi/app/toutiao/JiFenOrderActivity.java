@@ -119,6 +119,7 @@ public class JiFenOrderActivity extends AppCompatActivity {
             public void onRefresh() {
                 jifenList.clear();
                 pageIndex = 1;
+                listView.setCanLoadMore(true);
                 JsonHttpResponseHandler kc = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

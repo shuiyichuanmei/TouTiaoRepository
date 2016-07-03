@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rbOne, rbTwo, rbThree, rbFour;
     private UpdateAppManager updateManager;
     private DoubleClickExitHelper doubleClick;
+    private long firClick;
+    private int dianjicount=0;
+    private long secClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,30 @@ public class MainActivity extends AppCompatActivity {
             rbtn.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
 
         }
+
+        rbFour.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(MotionEvent.ACTION_DOWN == event.getAction()){
+                    dianjicount++;
+                    if(dianjicount == 1){
+                        firClick = System.currentTimeMillis();
+
+                    } else if (dianjicount == 2){
+                        secClick = System.currentTimeMillis();
+                        if(secClick - firClick < 1000){
+                            Intent intent = new Intent();
+                            intent.setAction("action.refreshShangPin");
+                            sendBroadcast(intent);
+                        }
+                        dianjicount = 0;
+                        firClick = 0;
+                        secClick = 0;
+                    }
+                }
+                return false;
+            }
+        });
 
         bottomRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
