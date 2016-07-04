@@ -75,13 +75,13 @@
                         android:typeface="monospace"
                         android:id="@+id/xinwen_rb2"
                         style="@style/radio_style"
-                        android:text="便民" />
+                        android:text="优惠" />
 
                     <RadioButton
                         android:typeface="monospace"
                         android:id="@+id/xinwen_rb3"
                         style="@style/radio_style"
-                        android:text="优惠" />
+                        android:text="便民" />
                 </RadioGroup>
 
                 <TextView

@@ -37,7 +37,7 @@ public class DoubleClickExitHelper {
         } else {
             isOnKeyBacking = true;
             if(mBackToast == null) {
-                mBackToast = Toast.makeText(mActivity, "再按一次返回", Toast.LENGTH_LONG);
+                mBackToast = Toast.makeText(mActivity, "再点一次退出", Toast.LENGTH_LONG);
             }
             mBackToast.show();
             //延迟两秒的时间，把Runable发出去

@@ -3,12 +3,13 @@ package com.shuiyi.app.toutiao;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 
-public class Welcome extends Activity {
+public class Welcome extends AppCompatActivity {
 	private AlphaAnimation start_anima;
 	View view;
 	@Override
