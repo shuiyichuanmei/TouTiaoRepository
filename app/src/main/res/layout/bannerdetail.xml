@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/banner_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#f33"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/btn_click_bg"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_backbtn_click" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="40dp"
+            android:textColor="#fff"
+            android:textSize="23dp" />
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/wb_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/banner_bar_layout"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/ss_htmlprogessbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="8.0dip"
+        android:layout_above="@id/banner_bar_layout"
+        android:layout_marginBottom="2.0dip"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:max="100"
+        android:visibility="gone" />
+</LinearLayout>

@@ -142,7 +142,7 @@ public class ShangChengDetailActivity extends AppCompatActivity {
                                     btnDuihuan.setBackgroundResource(R.drawable.btn_false);
                                     btnDuihuan.setEnabled(false);
                                 } else if (s.equals("jifenbuzu")) {
-                                    Toast.makeText(ShangChengDetailActivity.this, "您的积分不足", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ShangChengDetailActivity.this, "您的礼券不足", Toast.LENGTH_LONG).show();
                                 }
                                 Intent intent = new Intent();
                                 intent.setAction("action.refreshShangPin");

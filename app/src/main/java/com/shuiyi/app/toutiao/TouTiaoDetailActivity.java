@@ -57,11 +57,11 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
             if (daojishi <= 0) {
                 daojishi = 5;
                 btnGetJiFen.setEnabled(true);
-                btnGetJiFen.setText("领取" + jifen + "积分");
+                btnGetJiFen.setText("领取" + jifen + "礼券");
                 btnGetJiFen.setBackgroundResource(R.drawable.denglu_btn_click);
                 btnGetJiFen.setTextColor(Color.parseColor("#ffffff"));
             } else {
-                btnGetJiFen.setText(daojishi + "秒后可领取" + jifen + "积分");
+                btnGetJiFen.setText(daojishi + "秒后可领取" + jifen + "礼券");
                 handler.postDelayed(this, 1000);
                 btnGetJiFen.setTextColor(Color.parseColor("#999999"));
                 btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
@@ -122,20 +122,20 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             String msg = response.getString("msg");
                             if (success.equals("true")) {
                                 btnGetJiFen.setEnabled(false);
-                                btnGetJiFen.setText("已领取" + jifen + "积分");
+                                btnGetJiFen.setText("已领取" + jifen + "礼券");
                                 btnGetJiFen.setTextColor(Color.parseColor("#999999"));
                                 btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
                                 Intent intent = new Intent();
                                 intent.setAction("action.refreshFriend");
                                 sendBroadcast(intent);
-                                Toast.makeText(TouTiaoDetailActivity.this, "恭喜您获得了" + jifen + "积分", Toast.LENGTH_LONG).show();
+                                Toast.makeText(TouTiaoDetailActivity.this, "恭喜您获得了" + jifen + "礼券", Toast.LENGTH_LONG).show();
 
                             } else if (success.equals("chongfu")) {
                                 btnGetJiFen.setEnabled(false);
-                                btnGetJiFen.setText("您之前领取过该条信息的积分");
+                                btnGetJiFen.setText("您之前领取过该条信息的礼券");
                                 btnGetJiFen.setTextColor(Color.parseColor("#999999"));
                                 btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
-                                Toast.makeText(TouTiaoDetailActivity.this, "您之前领取过该条信息的积分", Toast.LENGTH_LONG).show();
+                                Toast.makeText(TouTiaoDetailActivity.this, "您之前领取过该条信息的礼券", Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception ex) {
                         }
@@ -216,7 +216,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                             jiFenId = response.getString("jifenid");
                             btnGetJiFen.setVisibility(View.VISIBLE);
                             btnGetJiFen.setEnabled(false);
-                            btnGetJiFen.setText("已领取" + jifen + "积分");
+                            btnGetJiFen.setText("已领取" + jifen + "礼券");
                             btnGetJiFen.setTextColor(Color.parseColor("#999999"));
                             btnGetJiFen.setBackgroundResource(R.drawable.btn_false);
 

@@ -30,7 +30,7 @@
                 android:id="@+id/mingcheng"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="兑换商品名称"
+                android:text=""
                 android:layout_weight="1"
                 android:textSize="18dp"
                 android:textColor="#333333"/>
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:width="170dp"
-                android:text="兑换状态"
+                android:text=""
                 android:textColor="@color/white"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="积分:" />
+                android:text="礼券:" />
 
             <TextView
                 android:id="@+id/num_text"
@@ -76,7 +76,7 @@
                 android:id="@+id/timedate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="时间"
+                android:text=""
                 />
         </LinearLayout>
     </LinearLayout>

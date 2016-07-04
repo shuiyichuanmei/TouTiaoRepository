@@ -1,6 +1,7 @@
 package com.shuiyi.app.toutiao.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.shuiyi.app.toutiao.BannerDetailActivity;
 import com.shuiyi.app.toutiao.MainActivity;
 import com.shuiyi.app.toutiao.R;
 import com.shuiyi.app.toutiao.bean.ImageBean;
@@ -31,6 +33,7 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
     private Context curcontext;
     private PictureFragment fragment;
     private ImageCycleView mAdView;
+    ArrayList<ImageBean> guideImgs = new ArrayList<ImageBean>();
 
     public TouTiaoAdapter(Context context, ArrayList<TouTiaoBean> beans) {
         super(context, beans);
@@ -44,14 +47,10 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
     private ImageCycleView.ImageCycleViewListener mAdCycleViewListener = new ImageCycleView.ImageCycleViewListener() {
         @Override
         public void onImageClick(int position, View imageView) {
-            // Intent intent = new Intent(getActivity(),
-            // ViewPagerExampleActivity.class);
-            // intent.putExtra("strings", mImageUrl);
-            // intent.putExtra("index", position);
-            // startActivity(intent);
-            // getActivity().overridePendingTransition(
-            // android.R.anim.slide_in_left,
-            // android.R.anim.slide_out_right);
+            Intent intent = new Intent(curcontext,
+                    BannerDetailActivity.class);
+            intent.putExtra("url", guideImgs.get(position).getImglink());
+            curcontext.startActivity(intent);
         }
 
         @Override
@@ -74,10 +73,13 @@ public class TouTiaoAdapter extends MyBaseAdapter<TouTiaoBean> {
             convertView = mInflater.inflate(R.layout.firstitem, parent, false);
             String imgurl = beans.get(position).getTitleImg();
             String[] imgs = imgurl.toString().split("&");
-            ArrayList<ImageBean> guideImgs = new ArrayList<ImageBean>();
+            String imglink = beans.get(position).getJianJie();
+            String[] imglinks = imglink.toString().split("&");
+            guideImgs.clear();
             for (int i = 0; i < imgs.length; i++) {
                 ImageBean imageBean = new ImageBean();
                 imageBean.setImgurl(imgs[i]);
+                imageBean.setImglink(imglinks[i]);
                 guideImgs.add(imageBean);
             }
             mAdView = (ImageCycleView) ViewHolder.get(convertView, R.id.ad_view);

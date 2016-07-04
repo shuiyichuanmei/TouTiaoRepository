@@ -1,6 +1,7 @@
 package com.shuiyi.app.toutiao.scrollad;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -253,6 +254,8 @@ public class ImageCycleView extends LinearLayout {
          * 图片资源列表
          */
         private ArrayList<ImageBean> mAdList = new ArrayList<ImageBean>();
+
+
 
         /**
          * 广告图片点击监听
