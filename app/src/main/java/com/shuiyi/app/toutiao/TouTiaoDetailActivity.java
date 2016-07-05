@@ -46,7 +46,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
     private String jiFenId;
     private String tid;
     private String tel;
-    private ImageButton backButton;
+    private ImageButton backButton, fenxiangButton;
     private Button btnGetJiFen;
     private LinearLayout linearLayout;
     MyWebView webView;
@@ -90,7 +90,8 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
         progressBar.setVisibility(View.VISIBLE);
         backButton = (ImageButton) this.findViewById(R.id.imageButton);
-        linearLayout= (LinearLayout) this.findViewById(R.id.first);
+        linearLayout = (LinearLayout) this.findViewById(R.id.first);
+        fenxiangButton = (ImageButton) this.findViewById(R.id.imageButton2);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

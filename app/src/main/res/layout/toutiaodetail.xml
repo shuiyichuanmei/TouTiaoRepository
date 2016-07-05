@@ -40,7 +40,14 @@
                 android:textColor="#fff"
                 android:textSize="20dp" />
 
-
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_click_bg"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_backbtn_click" />
         </LinearLayout>
 
         <com.shuiyi.app.toutiao.view.MyWebView
