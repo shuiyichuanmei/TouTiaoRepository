@@ -1,13 +1,16 @@
 package com.shuiyi.app.toutiao;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,13 +24,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.shuiyi.app.toutiao.bean.JiFenOrderBean;
 import com.shuiyi.app.toutiao.common.Common;
+import com.shuiyi.app.toutiao.common.QRCodeUtil;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
 import com.shuiyi.app.toutiao.view.MyWebView;
 import com.shuiyi.app.toutiao.view.ScrollInterface;
@@ -49,6 +55,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
     private ImageButton backButton, fenxiangButton;
     private Button btnGetJiFen;
     private LinearLayout linearLayout;
+    private Dialog alertDialog;
     MyWebView webView;
     int daojishi = 5;
     private Handler handler = new Handler();
@@ -92,7 +99,40 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         backButton = (ImageButton) this.findViewById(R.id.imageButton);
         linearLayout = (LinearLayout) this.findViewById(R.id.first);
         fenxiangButton = (ImageButton) this.findViewById(R.id.imageButton2);
+        fenxiangButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                View root = TouTiaoDetailActivity.this.getLayoutInflater().inflate(R.layout.send_wx, null);
+                Button pyBtn = (Button) root.findViewById(R.id.pyBtn);
+                pyBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Common.WXFenxiang(TouTiaoDetailActivity.this, news_url, "", "会话");
+                    }
+                });
+                Button pyqBtn = (Button) root.findViewById(R.id.pyqBtn);
+                pyqBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Common.WXFenxiang(TouTiaoDetailActivity.this, news_url, "", "朋友圈");
+                    }
+                });
+                Button falesBtn = (Button) root.findViewById(R.id.falesBtn);
+                falesBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+                alertDialog = new AlertDialog.Builder(TouTiaoDetailActivity.this)
+                        .setView(root).create();
+
+                alertDialog.show();
+            }
+        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

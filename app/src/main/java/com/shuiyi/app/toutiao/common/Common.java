@@ -25,7 +25,7 @@ public class Common {
     private static SharedPreferences preferences;
     private static SharedPreferences.Editor editor;
 
-    private void WXFenxiang(Context context, String url, String title, String scene) {
+    public static void WXFenxiang(Context context, String url, String title, String scene) {
 
         WXWebpageObject wbobj = new WXWebpageObject();
         wbobj.webpageUrl = url;
