@@ -23,6 +23,7 @@
             android:name=".Welcome"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
+            android:hardwareAccelerated="false"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
