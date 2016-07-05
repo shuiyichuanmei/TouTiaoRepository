@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,14 +34,19 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.shuiyi.app.toutiao.bean.ShangChengBean;
 import com.shuiyi.app.toutiao.common.Common;
+import com.shuiyi.app.toutiao.common.Util;
 import com.shuiyi.app.toutiao.net.AsyncHttpUtil;
 import com.shuiyi.app.toutiao.view.MyWebView;
 import com.shuiyi.app.toutiao.view.ScrollInterface;
+import com.tencent.mm.sdk.modelmsg.GetMessageFromWX;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXTextObject;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
@@ -68,6 +74,8 @@ public class ShangChengDetailActivity extends AppCompatActivity {
         initView();
         initWebView();
     }
+
+
 
     private void initView() {
         progressBar = (ProgressBar) findViewById(R.id.ss_htmlprogessbar);
