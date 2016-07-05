@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +19,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -99,19 +103,35 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         backButton = (ImageButton) this.findViewById(R.id.imageButton);
         linearLayout = (LinearLayout) this.findViewById(R.id.first);
         fenxiangButton = (ImageButton) this.findViewById(R.id.imageButton2);
+
         fenxiangButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 View root = TouTiaoDetailActivity.this.getLayoutInflater().inflate(R.layout.send_wx, null);
                 Button pyBtn = (Button) root.findViewById(R.id.pyBtn);
+//             AlertDialog dlg = new AlertDialog.Builder(this).create();
+//
+//                Window w=dlg.getWindow();
+//                WindowManager.LayoutParams lp =w.getAttributes();
+//                lp.x=10;
+//                lp.y=150;
                 pyBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Common.WXFenxiang(TouTiaoDetailActivity.this, news_url, "", "会话");
+
                     }
                 });
                 Button pyqBtn = (Button) root.findViewById(R.id.pyqBtn);
+                Resources res = getResources();
+                Drawable img_on, img_off;
+                img_off = res.getDrawable(R.drawable.fx_pyq_icon);
+                img_off.setBounds(0, 0, 120, 120);
+                pyqBtn.setCompoundDrawables(null, img_off, null, null);
+                img_on = res.getDrawable(R.drawable.fx_wxpy_icon);
+                img_on.setBounds(0, 0, 120, 120);
+                pyBtn.setCompoundDrawables(null, img_on, null, null);
                 pyqBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -296,4 +316,5 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
             super.onProgressChanged(view, newProgress);
         }
     }
+
 }

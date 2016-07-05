@@ -47,7 +47,7 @@
                 android:background="@drawable/btn_click_bg"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/icon_backbtn_click" />
+                android:src="@drawable/icon_fengxiang_click" />
         </LinearLayout>
 
         <com.shuiyi.app.toutiao.view.MyWebView

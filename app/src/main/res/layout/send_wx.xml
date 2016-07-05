@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
+    android:background="#ffffff"
     android:orientation="vertical"
-    >
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/pop_layout"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        >
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/pyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/fx_wxpy_icon"
                 android:text="微信好友"
+
                 />
+
             <Button
                 android:id="@+id/pyqBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/fx_pyq_icon"
-                android:text="微信朋友圈"/>
+                android:text="微信朋友圈"
+
+                />
         </LinearLayout>
-<Button
-    android:id="@+id/falesBtn"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="取消分享"/>
+
+        <Button
+            android:id="@+id/falesBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/fx_bor_click"
+            android:text="取消分享" />
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
