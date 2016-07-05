@@ -23,7 +23,7 @@ public class Welcome extends AppCompatActivity {
 	}
 	private void initData() {
 		start_anima = new AlphaAnimation(0.3f, 1.0f);
-		start_anima.setDuration(2000);
+		start_anima.setDuration(3000);
 		view.startAnimation(start_anima);
 		start_anima.setAnimationListener(new AnimationListener() {
 			
