@@ -19,7 +19,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
  */
 public class Common {
 
-    public static final String APP_ID = "";
+    public static final String APP_ID = "wx51f8dd07ef7d9298";
     public static IWXAPI wxapi;
 
     private static SharedPreferences preferences;
@@ -31,12 +31,13 @@ public class Common {
         wbobj.webpageUrl = url;
         WXMediaMessage msg = new WXMediaMessage();
         msg.mediaObject = wbobj;
-        msg.description = title;
+        msg.title = title;
+        msg.description = "宝清人自己的新闻客户端";
         Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.icon);
         msg.thumbData = Util.bmpToByteArray(thumb, true);
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         if (scene.equals("朋友圈")) {
-            req.scene = SendMessageToWX.Req.WXSceneSession;
+            req.scene = SendMessageToWX.Req.WXSceneTimeline;
         } else if (scene.equals("会话")) {
             req.scene = SendMessageToWX.Req.WXSceneSession;
         }

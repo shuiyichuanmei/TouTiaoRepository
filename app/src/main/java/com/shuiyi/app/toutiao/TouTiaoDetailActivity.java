@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -60,6 +61,8 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
     private Button btnGetJiFen;
     private LinearLayout linearLayout;
     private Dialog alertDialog;
+    private String title;
+    private String fxUrl;
     MyWebView webView;
     int daojishi = 5;
     private Handler handler = new Handler();
@@ -88,10 +91,11 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
         //setNeedBackGesture(true);//设置需要手势监听
 
         Intent intent1 = getIntent();
+        title = intent1.getStringExtra("title");
         tid = intent1.getStringExtra("id");
         news_url = "http://toutiao.ishowyou.cc/appdetail.aspx?id=" + tid;
+        fxUrl= "http://toutiao.ishowyou.cc/WebDetail.aspx?id=" + tid;
         tel = Common.getSharedPreferences(TouTiaoDetailActivity.this, "tel");
-
 
         initView();
         initWebView();
@@ -110,16 +114,10 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
 
                 View root = TouTiaoDetailActivity.this.getLayoutInflater().inflate(R.layout.send_wx, null);
                 Button pyBtn = (Button) root.findViewById(R.id.pyBtn);
-//             AlertDialog dlg = new AlertDialog.Builder(this).create();
-//
-//                Window w=dlg.getWindow();
-//                WindowManager.LayoutParams lp =w.getAttributes();
-//                lp.x=10;
-//                lp.y=150;
                 pyBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Common.WXFenxiang(TouTiaoDetailActivity.this, news_url, "", "会话");
+                        Common.WXFenxiang(TouTiaoDetailActivity.this, fxUrl, title, "会话");
 
                     }
                 });
@@ -135,7 +133,7 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
                 pyqBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Common.WXFenxiang(TouTiaoDetailActivity.this, news_url, "", "朋友圈");
+                        Common.WXFenxiang(TouTiaoDetailActivity.this, fxUrl, title, "朋友圈");
                     }
                 });
                 Button falesBtn = (Button) root.findViewById(R.id.falesBtn);
@@ -149,7 +147,9 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
 
                 alertDialog = new AlertDialog.Builder(TouTiaoDetailActivity.this)
                         .setView(root).create();
-
+                Window w = alertDialog.getWindow();
+                WindowManager.LayoutParams lp = w.getAttributes();
+                w.setGravity(Gravity.BOTTOM);
                 alertDialog.show();
             }
         });
