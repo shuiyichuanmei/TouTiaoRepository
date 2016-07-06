@@ -23,7 +23,7 @@ public class MyAppLication extends Application {
         super.onCreate();
         instance = this;
         initImageLoader(getApplicationContext());
-        regToWx();
+
     }
 
     public static MyAppLication getInstance() {
@@ -50,9 +50,5 @@ public class MyAppLication extends Application {
         ImageLoader.getInstance().init(config);
     }
 
-    private void regToWx() {
 
-        Common.wxapi = WXAPIFactory.createWXAPI(this, Common.APP_ID, true);
-        Common.wxapi.registerApp(Common.APP_ID);
-    }
 }

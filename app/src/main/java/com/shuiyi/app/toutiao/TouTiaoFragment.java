@@ -146,6 +146,7 @@ public class TouTiaoFragment extends Fragment {
                 TouTiaoBean item = (TouTiaoBean) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), TouTiaoDetailActivity.class);
                 intent.putExtra("id", item.getId());
+                intent.putExtra("title", item.getBiaoTi());
                 startActivity(intent);
             }
         });

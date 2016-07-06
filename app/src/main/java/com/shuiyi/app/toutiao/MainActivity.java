@@ -17,6 +17,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.shuiyi.app.toutiao.common.Common;
 import com.shuiyi.app.toutiao.common.DoubleClickExitHelper;
 import com.shuiyi.app.toutiao.common.UpdateAppManager;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.show(mFragments[0]).commit();
         setFragmentIndicator();
         doubleClick = new DoubleClickExitHelper(this);
+        regToWx();
+    }
+    private void regToWx() {
+
+        Common.wxapi = WXAPIFactory.createWXAPI(this, Common.APP_ID, true);
+        Common.wxapi.registerApp(Common.APP_ID);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

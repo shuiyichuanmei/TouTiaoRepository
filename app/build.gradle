@@ -11,11 +11,29 @@ android {
         versionCode 1
         versionName "1.6"
     }
+    signingConfigs {
+        release {
+            storeFile file('toutiao.jks')
+            storePassword 'shuiyi'
+            keyAlias 'baoqingtoutiao'
+            keyPassword 'shuiyi'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.each {
+                output -> output.outputFile = new File(output.outputFile.parent, "BaoqingToutiao" + "_v" + defaultConfig.versionName + ".apk");
+            }
     }
 }
 
