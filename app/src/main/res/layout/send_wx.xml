@@ -4,14 +4,13 @@
     android:layout_height="wrap_content"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <LinearLayout
         android:id="@+id/pop_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <LinearLayout
@@ -25,8 +24,8 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/fx_wxpy_icon"
                 android:text="微信好友"
-
-                />
+                android:textColor="#333333"
+                android:textSize="12dp" />
 
             <Button
                 android:id="@+id/pyqBtn"
@@ -34,17 +33,19 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/fx_pyq_icon"
                 android:text="微信朋友圈"
-
-                />
+                android:textColor="#333333"
+                android:textSize="12dp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/falesBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/fx_bor_click"
-            android:text="取消分享" />
+            android:text="取消分享"
+            android:textColor="#666666"
+            android:textSize="14dp" />
 
     </LinearLayout>
 </LinearLayout>
