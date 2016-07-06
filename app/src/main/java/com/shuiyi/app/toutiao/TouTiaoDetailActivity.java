@@ -149,7 +149,10 @@ public class TouTiaoDetailActivity extends AppCompatActivity {
 
                 alertDialog = new AlertDialog.Builder(TouTiaoDetailActivity.this)
                         .setView(root).create();
-
+                Window w=alertDialog.getWindow();
+                WindowManager.LayoutParams lp =w.getAttributes();
+                lp.x=0;
+                lp.y=400;
                 alertDialog.show();
             }
         });
