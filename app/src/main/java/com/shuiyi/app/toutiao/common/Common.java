@@ -32,7 +32,7 @@ public class Common {
         WXMediaMessage msg = new WXMediaMessage();
         msg.mediaObject = wbobj;
         msg.title = title;
-        msg.description = "宝清人自己的新闻客户端";
+        msg.description = "每天都有新鲜事";
         Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.mipmap.icon);
         msg.thumbData = Util.bmpToByteArray(thumb, true);
         SendMessageToWX.Req req = new SendMessageToWX.Req();
