@@ -60,11 +60,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="微信平台:宝清东方快餐"
+                android:textSize="14dp"
                 android:textColor="@color/blue42B6FF" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:text="在线订餐 餐到付款 优先配送"
                 android:textColor="#999999" />
 
@@ -109,11 +111,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="微信平台:宝清外卖"
+                android:textSize="14dp"
                 android:textColor="@color/blue42B6FF" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:text="网上外卖 在线订餐 货到付款"
                 android:textColor="#999999" />
         </LinearLayout>
@@ -157,11 +161,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="微信平台:四季鲜奶吧"
+                android:textSize="14dp"
                 android:textColor="@color/blue42B6FF" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="14dp"
                 android:text="网上商城 在线选品 货到付款"
                 android:textColor="#999999" />
         </LinearLayout>
@@ -205,12 +211,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="微信平台:宝清中金"
+                android:textSize="14dp"
                 android:textColor="@color/blue42B6FF" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="活动推介 新品展示"
+                android:textSize="14dp"
                 android:textColor="#999999" />
         </LinearLayout>
 

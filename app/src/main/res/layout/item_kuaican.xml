@@ -24,9 +24,8 @@
             android:id="@+id/biaoti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-5dp"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="18dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,13 +36,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="送餐提醒:"
-                android:textColor="@color/ff6600" />
+                android:textColor="@color/ff6600"
+                android:textSize="14dp" />
 
 
             <TextView
                 android:id="@+id/xfText"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textSize="14dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,12 +56,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="消费参考:"
-                android:textColor="@color/ff6600" />
+                android:textColor="@color/ff6600"
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/txText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="14dp" />
         </LinearLayout>
 
     </LinearLayout>
